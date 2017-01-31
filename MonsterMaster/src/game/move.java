@@ -2,7 +2,6 @@ package game;
 
 import cards.*;
 import java.util.ArrayList;
-import java.util.concurrent.ThreadLocalRandom;
 
 
 //Here is the move class with the various legal moves a player can do.
@@ -108,7 +107,7 @@ public class move {
 		int highest = 0;
 		int loc = 0;
 		for(int look = 0; look < user.hand.size(); look++){
-			if(user.hand.get(look).getName() == "sword"){
+			if(user.hand.get(look).getName().equals("sword")){
 				loc = look;
 				break;
 			}
@@ -121,9 +120,7 @@ public class move {
 				}
 			}
 		if(pos != -1){
-			user.field.get(pos).sword = true;
-			user.hand.remove(loc);
-			System.out.println(user.id + " used sword on " + user.field.get(pos).getName());
+                    user.hand.get(loc).effect(user, null, highest, pos);
 		}
 	}
 	
@@ -138,7 +135,7 @@ public class move {
 		int highest = 0;
 		int loc = 0;
 		for(int look = 0; look < user.hand.size(); look++){
-			if(user.hand.get(look).getName() == "shield"){
+			if(user.hand.get(look).getName().equals("shield")){
 				loc = look;
 				break;
 			}
@@ -151,9 +148,7 @@ public class move {
 				}
 			}
 		if(pos != -1){
-			user.field.get(pos).shield = true;
-			user.hand.remove(loc);
-			System.out.println(user.id + " used shield on " + user.field.get(pos).getName());
+                    user.hand.get(loc).effect(user, null, highest, pos);
 		}
 	}
 	
@@ -167,7 +162,7 @@ public class move {
 		int highest = 0;
 		int loc = 0;
 		for(int look = 0; look < user.hand.size(); look++){
-			if(user.hand.get(look).getName() == "curse"){
+			if(user.hand.get(look).getName().equals("curse")){
 				loc = look;
 				break;
 			}
@@ -181,18 +176,17 @@ public class move {
 				}
 			}
 		if(pos != -1){
-			arena.get(pos).curse = true;
-			user.hand.remove(loc);
-			System.out.println(user.id + " used curse on " + arena.get(pos).getName());
+                    user.hand.get(loc).effect(user, null, highest, pos);
 		}
 	}
 	
 	
 	//The function will go through the player's whole field
 	//and get each monster to attack. The monster's target is
-	//dependent on strategy used. If any monster dies then they
-	//are removed here. If the opponent loses all their health then
-	//the attacking stops. Battle calculations happen here. 
+	//dependent on strategy used. If the opponent loses all their health then
+	//the attacking stops. This function will call the monster's effect function
+        //to attack the target. The monster will only attack if their placed value equals
+        //zero.
 	public void battle(player user, player enemy,boolean hard){
 		for(int attacks = 0; attacks < user.field.size();attacks++){
 			int pos;
@@ -210,36 +204,8 @@ public class move {
 			//If not then full attack value is subtracted from opponent's health.
 			if(user.field.get(attacks).getPlaced() <= 0){
 				user.field.get(attacks).attacked = true;
-				if(pos != -1){
-					int dmg = fight(user.field.get(attacks),enemy.field.get(pos));
-					System.out.println(user.field.get(attacks).getName()+" attacks "+enemy.field.get(pos).getName());
-					if(dmg < 0){
-						if(user.field.get(attacks).getName().equals("alien")){continue;}
-						else { 
-							user.field.get(attacks).setHp(dmg);
-							System.out.println(user.field.get(attacks).getName()+" deals " + (-dmg) +" damage.");
-							if(user.field.get(attacks).getHp() <= 0){
-								System.out.println(user.field.get(attacks).getName() + " dies");
-								user.field.remove(attacks);
-							}
-						}
-					}
-					else if(dmg > 0){
-						enemy.field.get(pos).setHp(dmg);
-						if(enemy.field.get(pos).getHp() == 0){
-							System.out.println(enemy.field.get(pos).getName() + " dies");
-							enemy.field.remove(pos);}
-						if(user.field.get(attacks).getName().equals("vampire")){
-							user.field.get(attacks).setHp(dmg);
-							System.out.println("vampire heals");
-						}
-					}
-				}
-				else{
-				System.out.println(user.field.get(attacks).getName() +" attacks directly for "+ user.field.get(attacks).getAtk()+ " damage.");
-				enemy.setHp(user.field.get(attacks).getAtk());
-				if(enemy.lose){break;}
-				}			
+                                user.field.get(attacks).effect(user, enemy, pos,attacks);
+                                if(enemy.lose){break;}
 			}	
 		}
 	}
@@ -266,25 +232,5 @@ public class move {
 	private int attack(ArrayList <Monster> field){
 		if(field.size() > 0){return 0;}
 		else {return -1;}
-	}
-	
-	
-	//This is the function that does battle calculations.
-	//The function will create 2 randomly generated numbers.
-	//One will take the attacking monster's attack value and the
-	//other number will take the defending monster's defense value.
-	//The range of the 2 numbers be between 0 and their respective 
-	//values. The difference of the two number wills be returned.
-	public int fight(Monster p, Monster c){
-		int atk = ThreadLocalRandom.current().nextInt(0,p.getAtk()+1);
-		try {
-			Thread.sleep(10);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		int def = ThreadLocalRandom.current().nextInt(0,c.getDef()+1);
-		
-		return atk-def;
 	}
 }
