@@ -10,20 +10,21 @@ public class Monsters {
     
     
         //Monster that heals if it does damage to a monster.
-        public Monster vampire = new Monster("vampire",4,3,1,5);
+        public Vampire vampire = new Vampire();
     
         //Monsters that take no damage if failed attack
         public Alien alien = new Alien();
     
         //Monster that is immune to heals, poison, and mind control
-        public Monster golem = new Monster("golem",4,6,2,5);
+        public Golem golem = new Golem();
         
         //Monster immune to heals and poison
-        public Monster skeleton = new Monster("skeleton",3,2,1,3);
+        public Skeleton skeleton = new Skeleton();
         
         //Monsters with no abilities
 	public Knight knight = new Knight();
-	public Monster dwarf = new Monster("dwarf",5,5,2,5);
-	public Monster greebler = new Monster("greebler",4,3,1,3);
+	public Dwarf dwarf = new Dwarf();
+	public Greebler greebler = new Greebler();
 	
+        //ninja has been taken
 }

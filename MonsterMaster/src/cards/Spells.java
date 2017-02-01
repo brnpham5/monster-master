@@ -29,9 +29,9 @@ public class Spells {
         //Heal restores monster's health by 2.
         //Restore heals player's health by 2.
         //Sacrifice kills 1 monster to restores player's health by 5.
-	public Spell heal = new Spell("heal");
-        public Spell restore = new Spell("restore");	
-        public Spell sacrifice = new Spell("sacrifice");
+	public Spell heal = new Spell("heal");//g
+        public Spell restore = new Spell("restore");//g	
+        public Spell sacrifice = new Spell("sacrifice");//g
         
         //Removing buffs or ailment spells.
         //Cleanse removes any ailments on user's monster.
@@ -41,14 +41,14 @@ public class Spells {
         //Ex. Swords and Shields
 	public Spell cleanse = new Spell("cleanse");
 	public Spell antidote = new Spell("antidote");
-        public Spell strip = new Spell("strip");
+        public Spell strip = new Spell("strip");//g
 	
 	//Damage spells
         //Fireball inflicts 3 damage to an enemy's monster
         //Lightning inflicts 2 damage to an enemy's monster
         //Flood deals 1 damage to all monsters on both fields.
-	public Spell fireball = new Spell("fireball");
-	public Spell lightning = new Spell("lightning");
+	public Spell fireball = new Spell("fireball");//g
+	public Spell lightning = new Spell("lightning");//g
         public Spell flood = new Spell("flood");
         
         //Ailment spells
@@ -72,16 +72,16 @@ public class Spells {
         //Beckon does same thing as reborn except gets the monster from the user's deck.
         //Gift gets user to draw 2 cards from their deck.
 	public Spell steal = new Spell("steal");
-	public Spell forget = new Spell("forget");
+	public Spell forget = new Spell("forget");//g
         public Spell reborn = new Spell("reborn");
 	public Spell beckon = new Spell("beckon");
-	public Spell gift = new Spell("gift");
+	public Spell gift = new Spell("gift");//g
         
         //Killing spells.
         //Black Hole kills all monsters on both fields.
         //Doom kills enemy's monster with the lowest attack.
 	public Spell blackHole = new Spell("black hole");
-	public Spell doom = new Spell("doom");
+	public Spell doom = new Spell("doom");//g
         
         //This spell allows one of the user's monster to attack 1 more time.
         public Spell charge = new Spell("charge!");
