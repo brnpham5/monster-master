@@ -156,7 +156,7 @@ public class Monster implements Card {
 	public int getPlaced(){return placed;}
 	
 	public void setHp(int hp){
-		if((hp + health) > maxhp){ health = hp;}
+		if((-hp + health) > maxhp){ health = hp;}
 		else {health -= hp;}
 	}
 	
