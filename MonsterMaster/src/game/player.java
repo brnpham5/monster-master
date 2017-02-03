@@ -122,8 +122,7 @@ public class player {
 			lose = true;}
 		
 	}
-	
-	
+      	
 	//Function that changes player's health value.
 	//For now will only decrease from monster attack.
 	//If the health value goes below 0 or equal to 0 then 

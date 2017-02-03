@@ -33,6 +33,11 @@ public class deck {
 	//This is used to make sure the player loses to no 
 	//cards drawn.
 	public boolean checkDeck(){ return (Cards.size() != 0); }
+        
+        //Function to check the size of the deck
+        //Will be used in other classes to check deck size for
+        //specified size. 
+        public int deckSize(){ return Cards.size(); }
 	
 	
 	//Since premade decks will always be the same, this function
