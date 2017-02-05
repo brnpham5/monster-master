@@ -18,9 +18,10 @@ public class Dumb implements Strategy {
 	//they will. If the can't do any of the mention they pass.
 	//A move object is passed with flags telling the player what to
 	// do.
-	public ArrayList<move> pickMove(player user, ArrayList <Monster> arena){
+	public ArrayList<move> pickMove(player user, player enemy){
 		ArrayList <move> moves = new ArrayList<move>();
-		if(user.hasHandMonster() && !user.summoned){
+                int [] contents = user.countHand();
+		if(contents[0] > 0 && !user.summoned){
 			moves.add(new FirstSummon());
 		}
                 if(moves.isEmpty()){

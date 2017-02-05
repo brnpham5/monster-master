@@ -8,7 +8,9 @@ package cards;
 import game.player;
 
 /**
- *
+ * Class that represents the AIce Shield spell Card.
+ * Strategy pattern was used in making this as it fit the best with 
+ * existing code more than Observer or Decorator.
  * @author Michael
  */
 public class IceShield extends Spell{

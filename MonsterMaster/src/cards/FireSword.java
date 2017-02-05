@@ -8,7 +8,9 @@ package cards;
 import game.player;
 
 /**
- *
+ * Class that represents the Fire Sword spell Card.
+ * Strategy pattern was used in making this as it fit the best with 
+ * existing code more than Observer or Decorator.
  * @author Michael
  */
 public class FireSword extends Spell{

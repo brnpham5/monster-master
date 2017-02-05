@@ -13,5 +13,5 @@ public interface Strategy {
         //This function will get information from the player object and the
         //enemy's field. The function will then add valid moves to the arraylist
         //for the player to do. 
-	public ArrayList<move> pickMove(player user, ArrayList<Monster> arena);
+	public ArrayList<move> pickMove(player user, player enemy);
 }

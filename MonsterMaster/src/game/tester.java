@@ -53,9 +53,9 @@ public class tester {
 			System.out.println("Human Hp: \t"+ human.getHp() +
 				               "\t Computer Hp:\t"+ cpu.getHp());
 			human.hand.clear();
-			human.hand.add(group.greebler);
+			/*human.hand.add(group.greebler);
 			human.hand.add(group.knight);
-			human.hand.add(group.alien);
+			human.hand.add(group.alien);*/
 			human.turn(cpu);
 			System.out.println("\n");
 	
@@ -69,8 +69,8 @@ public class tester {
 				human.hand.add(powers.shield);
 				human.hand.add(powers.sword);
 				human.hand.add(powers.curse);
-				human.field.add(group.greebler);
-				cpu.field.add(group.greebler);
+				/*human.field.add(group.greebler);
+				cpu.field.add(group.greebler);*/
 				human.turn(cpu);
 				System.out.println("\n");
 			}
@@ -88,7 +88,7 @@ public class tester {
 				System.out.println("Human Hp: \t"+ human.getHp() +
 					               "\t Computer Hp:\t"+ cpu.getHp());
 				
-				human.field.add(group.vampire);
+				/*human.field.add(group.vampire);
 				human.field.get(0).setHp(1);
 				human.field.get(0).cooloff(1);
 				human.field.add(group.greebler);
@@ -97,7 +97,7 @@ public class tester {
 				cpu.field.get(0).setDef(0);
 				human.field.get(0).setHp(2);
 				human.turn(cpu);
-				System.out.println("\n");
+				System.out.println("\n");*/
 			}
 		if(choice.equals("4")){
 			while(!choice.equalsIgnoreCase("y") && !choice.equalsIgnoreCase("n")){

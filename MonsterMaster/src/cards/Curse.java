@@ -8,7 +8,11 @@ package cards;
 import game.player;
 
 /**
- *
+ * Class that represents the Curse spell Card.
+ * Strategy pattern was used in making this as it fit the best with 
+ * existing code more than Observer or Decorator.
+ * This card part of the homework assignment 1 and is changed to fit assignment
+ * 2.
  * @author Michael
  */
 public class Curse extends Spell{
@@ -29,7 +33,7 @@ public class Curse extends Spell{
     public void effect(player owner, player enemy, int target, int position){
         enemy.field.get(target).curse = true;
 	owner.hand.remove(position);
-	System.out.println(owner.id + " used curse on " + owner.field.get(target).getName());
+	System.out.println(owner.id + " used curse on " + enemy.field.get(target).getName());
     }
     
 }
