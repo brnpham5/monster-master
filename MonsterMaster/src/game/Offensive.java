@@ -9,27 +9,29 @@ import cards.Monster;
 //and killing the opponent's monster with the lowest defense value.
 public class Offensive implements Strategy {
 	
-	public move pickMove(player user, ArrayList <Monster> arena){
-		move choice = new move();
+	public ArrayList<move> pickMove(player user, ArrayList <Monster> arena){
+		ArrayList <move> moves = new ArrayList<move>();
 		boolean [][] spells = user.spellUse();
 		if(user.hasHandMonster() && !user.summoned){
 			if(arena.size() > (1+ user.field.size())){
-				choice.summonDef = true;}
+				moves.add(new DefenseSummon());}
 			else{
-				choice.summonAtk = true;}
+				moves.add(new AttackSummon());}
 		}
 		if(user.field.size() > 0 && spells[0][0] && spells[0][1]){
-			 choice.buffAtk = true;
+			 moves.add(new SwordBuff());
 		}
 		if(user.field.size() > 0 && spells[1][0] && spells[1][1]){
-			choice.buffDef = true;
+			moves.add(new ShieldBuff());
 		}
 		if(arena.size() > 0 && spells[2][0] && spells[2][1]){
-			choice.curse = true;
+			moves.add(new CurseDebuff());
 		}
-		if(user.field.size() > 0 && user.canAttack()){
-			choice.attack = true;
-		}else{ choice.pass = true;}
-		return choice;
+                if(moves.isEmpty()){    
+                    if(user.field.size() > 0 && user.canAttack()){
+                            moves.add(new OffensiveBattle());
+                    }
+                }
+		return moves;
 	}
 }

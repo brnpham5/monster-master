@@ -52,11 +52,7 @@ public class player {
 	//y at starting prompt.
 	public Offensive planB = null;
 	
-	
-	//A private variable that will be used to use the functions
-	//in move class. Used attack method.
-	private move action = new move();
-	
+        
 	
 	//A simple string that holds the name of the player.
 	//Only used in tester for display purposes while output
@@ -64,6 +60,10 @@ public class player {
 	public String id;
 	
 	
+        
+        //Flag that tells that the player has summoned a monster.
+        //This will be turned true after executing a summoning move.
+        //The flag is turned false at the end of the player's turn.
 	public boolean summoned = false;
 	
 	//creates premade deck then sends it to deck class to shuffle 
@@ -113,7 +113,7 @@ public class player {
 	
 	//Player draws a card from their deck.
 	//If they can't then they lost.
-	//Programs if they can draw before getting card from deck.
+	//Program  checks if they can draw before getting card from deck.
 	public void getCard(){
 		if(Deck.checkDeck()){
 			hand.add(Deck.draw());
@@ -125,12 +125,18 @@ public class player {
 	
 	
 	//Function that changes player's health value.
-	//For now will only decrease from monster attack.
+	//Positive numbers - damage to player.
+        //Negative numbers = healing player.
+        //The max health a player can have is 20. If player is healed for more
+        //then player will have 20 health.
 	//If the health value goes below 0 or equal to 0 then 
 	//flag for player lost is true.
 	public void setHp(int dmg){
-		health -= dmg;
-		if (health <= 0){lose = true;}
+            if((-dmg + health) == 20){
+                health = 20;
+            }
+            health -= dmg;
+            if (health <= 0){lose = true;}
 	}
 	
 	
@@ -153,6 +159,8 @@ public class player {
 	
 	
 	
+        //This function checks that the player has specific spell cards in their
+        //hand. If so set a flag to corresponding space in double array.
 	public boolean[][] spellUse(){
 		boolean[][] spells = new boolean[3][2];
 		Arrays.fill(spells[0], false);
@@ -199,6 +207,9 @@ public class player {
 	}
 	
 	
+        //This function checks that the player has at least 1 monster on the
+        //field that can attack. This function is used by the strategy classes
+        //to know when to attack.
 	public boolean canAttack(){
 		for(int loop = 0; loop < field.size();loop++){
 			if(!field.get(loop).attacked && field.get(loop).getPlaced() <= 0){
@@ -209,6 +220,9 @@ public class player {
 	}
 	
 	
+        //When player turn ends, summon flag is set to false and monster's
+        //attack flag is set to false. Also every monster placed value is reduced
+        //by 1.
 	private void refresh(){
 		summoned = false;
 		for(int loop = 0; loop < field.size();loop++){
@@ -224,8 +238,7 @@ public class player {
 	//Strategy changes which actions the player does.
 	//Main flow of the function is draw, summon, use spell, and attack.
 	public void turn(player enemy){
-		move choice = new move();
-		boolean hard = false;
+		ArrayList <move> moves = new ArrayList<move>();
 		System.out.print(id+" hand:");
 		for (int loop = 0;loop < hand.size();loop++){
 			System.out.print(hand.get(loop).getName() + ", ");
@@ -237,40 +250,22 @@ public class player {
 		}
 		System.out.println("\n");
 		
+                //Draw Card
 		getCard();
+                
+                //If couldn't draw card, end turn to lose game.
 		if(lose){return;}
-		while(!choice.pass && !enemy.lose){
+		do{
 			if(planA != null){
-				choice = planA.pickMove(this, enemy.field);
+				moves = planA.pickMove(this, enemy.field);
 			}
 			else { 
-				choice = planB.pickMove(this, enemy.field);}
-			if(choice.summonAtk){
-				choice.summonStrongest(this);
-				summoned = true;
-			}
-			if(choice.summonDef){
-				choice.summonDefensive(this);
-				summoned = true;
-			}
-			if(choice.summon){
-				choice.summon(this);
-				summoned = true;
-			}
-			if(choice.buffAtk){
-				choice.aBuff(this);
-			}
-			if(choice.buffDef){
-				choice.dBuff(this);
-			}
-			if(choice.curse){
-				choice.debuffMon(this, enemy.field);
-			}
-			if(choice.attack){
-				if(planB != null){hard = true;}
-				choice.battle(this, enemy,hard);
-			}
-		}
+				moves = planB.pickMove(this, enemy.field);}
+			for(int loop = 0; loop < moves.size();loop++){
+                            moves.get(loop).execute(this, enemy);
+                        }
+                if(enemy.lose){return;}
+		}while(!moves.isEmpty());
 		refresh();
 	}
 	
