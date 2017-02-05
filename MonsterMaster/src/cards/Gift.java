@@ -29,7 +29,9 @@ public class Gift extends Spell{
         if(owner.Deck.deckSize() > 2){   
             owner.getCard();
             owner.getCard();
+            owner.hand.remove(position);
             System.out.println(owner.id + " used gift");
+            
         }
     }
         
