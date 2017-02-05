@@ -21,15 +21,24 @@ public class Ninja extends Monster{
 		int dmg = fight(this,enem.field.get(targ)); // calculates damage
 		System.out.println(name+" attacks "+enem.field.get(targ).getName()); //prints out Ninja attacking
 		if(dmg < 0){
-                    System.out.println("Ninja failed to do damage"); //if damage is less than 0 it states that no damage delt
-		}
-		else if(dmg > 0){
+                    setHp(dmg);
+                    System.out.println(enem.field.get(targ).getName()+" deals " + (-dmg) +" damage.");
+                    if(health <= 0){
+                        System.out.println(name + " dies");
+                        own.field.remove(posit);
+			}
+                    System.out.println(name+"lost"+dmg+"health."); //if damage is less than 0 it states that no damage delt
+		}else if(dmg > 0){
                     // if damage is greater than 0 due to ninjas effect it should kill the enemy monster
                     enem.field.get(targ).setHp(0); //sets enemy targets health to 0
                     System.out.println(enem.field.get(targ).getName() + " dies"); //anounces enemy death
                     enem.field.remove(targ); //removes target
-        }
-                
-     }
+                }else{
+                    System.out.println("Ninja failed to do damage");
+                }
+            }else if(targ == -1){
+             int damage = 4;
+             enem.setHp(damage);
+            }
     }   
 }
