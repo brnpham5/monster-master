@@ -41,14 +41,14 @@ public class Spells {
         //Ex. Swords and Shields
 	public Spell cleanse = new Spell("cleanse");
 	public Spell antidote = new Spell("antidote");
-        public Spell strip = new Spell("strip");//g
+        public Strip strip = new Strip();
 	
 	//Damage spells
         //Fireball inflicts 3 damage to an enemy's monster
         //Lightning inflicts 2 damage to an enemy's monster
         //Flood deals 1 damage to all monsters on both fields.
-	public Spell fireball = new Spell("fireball");//g
-	public Spell lightning = new Spell("lightning");//g
+	public Fireball fireball = new Fireball();
+	public Lightning lightning = new Lightning();
         public Spell flood = new Spell("flood");
         
         //Ailment spells
@@ -72,16 +72,16 @@ public class Spells {
         //Beckon does same thing as reborn except gets the monster from the user's deck.
         //Gift gets user to draw 2 cards from their deck.
 	public Spell steal = new Spell("steal");
-	public Spell forget = new Spell("forget");//g
+	public Forget forget = new Forget();
         public Spell reborn = new Spell("reborn");
 	public Spell beckon = new Spell("beckon");
-	public Spell gift = new Spell("gift");//g
+	public Gift gift = new Gift();
         
         //Killing spells.
         //Black Hole kills all monsters on both fields.
         //Doom kills enemy's monster with the lowest attack.
 	public Spell blackHole = new Spell("black hole");
-	public Spell doom = new Spell("doom");//g
+	public Doom doom = new Doom();
         
         //This spell allows one of the user's monster to attack 1 more time.
         public Spell charge = new Spell("charge!");
