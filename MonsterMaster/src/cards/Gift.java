@@ -25,7 +25,7 @@ public class Gift extends Spell{
     //and then draws 2 cards and puts them into the player's hand.
     //The function will then remove the card and print out a statement
     //saying the spell was used.
-    public void effect(player owner){
+    public void effect(player owner, player enemy, int target, int position){
         if(owner.Deck.deckSize() > 2){   
             owner.getCard();
             owner.getCard();
