@@ -32,6 +32,7 @@ public class DefenseSummon implements move{
 			monster = (Monster)user.hand.get(position);
 			user.field.add(monster);
 			user.hand.remove(monster);
+                        user.summoned = true;
 			System.out.println(user.id +" summoned "+ monster.getName());
 			}
 		else{System.out.println(user.id +" does not summon.\n");}

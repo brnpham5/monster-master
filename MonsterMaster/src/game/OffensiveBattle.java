@@ -37,11 +37,12 @@ public class OffensiveBattle implements move{
 			//Fight will return a number that tells if attacker wins battle
 			//or not. Fight method only called if attacker's target is a monster.
 			//If not then full attack value is subtracted from opponent's health.
-			if(user.field.get(attacks).getPlaced() <= 0){
-				user.field.get(attacks).attacked = true;
-                                user.field.get(attacks).effect(user, enemy, pos,attacks);
-                                if(enemy.lose){break;}
-			}	
+			if(user.field.get(attacks).getPlaced() <= 0 && !user.field.get(attacks).attacked){
+                            user.field.get(attacks).attacked = true;    
+                            user.field.get(attacks).effect(user, enemy, pos,attacks);
+                            if(enemy.lose){break;}
+			}
+                         
 		}
 	}
         

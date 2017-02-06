@@ -6,7 +6,11 @@
 package cards;
 
 /**
- *
+ * Class that represents the Dwarf monster Card.
+ * Strategy pattern was used in making this as it fit the best with 
+ * existing code more than Observer or Decorator.
+ * This card part of the homework assignment 1 and is changed to fit assignment
+ * 2.
  * @author Michael
  */
 public class Dwarf extends Monster{

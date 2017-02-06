@@ -10,8 +10,8 @@ public class Spells {
         //Shields increases defense. Ice = +4, Regular = +2
         //Only 1 of each buff per monster. 
         //Ex. Monster can have 1 of each but not 2 regular swords.
-	public Spell fireSword = new Spell("fire sword");
-	public Spell iceShield = new Spell("ice shield");
+	public FireSword fireSword = new FireSword();
+	public IceShield iceShield = new IceShield();
 	public Sword sword = new Sword();
 	public Shield shield = new Shield();
         
@@ -29,9 +29,9 @@ public class Spells {
         //Heal restores monster's health by 2.
         //Restore heals player's health by 2.
         //Sacrifice kills 1 monster to restores player's health by 5.
-	public Spell heal = new Spell("heal");//g
-        public Spell restore = new Spell("restore");//g	
-        public Spell sacrifice = new Spell("sacrifice");//g
+	public Heal heal = new Heal();
+        public Restore restore = new Restore();
+        public Sacrifice sacrifice = new Sacrifice();
         
         //Removing buffs or ailment spells.
         //Cleanse removes any ailments on user's monster.

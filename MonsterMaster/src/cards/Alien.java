@@ -8,7 +8,11 @@ package cards;
 import game.player;
 
 /**
- *
+ * Class that represents the Alien monster Card.
+ * Strategy pattern was used in making this as it fit the best with 
+ * existing code more than Observer or Decorator.
+ * This card part of the homework assignment 1 and is changed to fit assignment
+ * 2.
  * @author Michael
  */
 public class Alien extends Monster{
@@ -32,7 +36,7 @@ public class Alien extends Monster{
 		}
 		else if(dmg > 0){
                     enemy.field.get(target).setHp(dmg);
-                    if(enemy.field.get(target).getHp() == 0){
+                    if(enemy.field.get(target).getHp() <= 0){
                         System.out.println(enemy.field.get(target).getName() + " dies");
                         enemy.field.remove(target);}
 			}

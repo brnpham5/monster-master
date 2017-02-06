@@ -2,7 +2,6 @@ package game;
 import cards.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 //This class will represent the players of the game.
 //The class holds their deck, hand, graveyard, and active monsters.
@@ -72,36 +71,8 @@ public class player {
 	//Name of player is assigned in this function.
 	//Function will draw the player 4 cards to start.
 	public player(Dumb strat,Offensive plan,String name){
-		ArrayList <Card> Cards = new ArrayList <Card>();
-		Monsters group = new Monsters();
-		Spells powers = new Spells();
-		Cards.add(group.alien);
-		Cards.add(group.alien);
-		Cards.add(group.knight);
-		Cards.add(group.knight);
-		Cards.add(group.golem);
-		Cards.add(group.golem);
-		Cards.add(group.skeleton);
-		Cards.add(group.skeleton);
-		Cards.add(group.skeleton);
-		Cards.add(group.vampire);
-		Cards.add(group.vampire);
-		Cards.add(group.vampire);
-		Cards.add(group.dwarf);
-		Cards.add(group.dwarf);
-		Cards.add(group.dwarf);
-		Cards.add(group.greebler);
-		Cards.add(group.greebler);
-		Cards.add(group.greebler);
-		Cards.add(powers.shield);
-		Cards.add(powers.shield);
-		Cards.add(powers.sword);
-		Cards.add(powers.sword);
-		Cards.add(powers.sword);
-		Cards.add(powers.curse);
-		Cards.add(powers.curse);
-		Cards.add(powers.curse);
-		Deck = new deck(Cards);
+		
+		defaultDeck();
 		id = name;
 		planA = strat;
 		planB = plan;
@@ -110,6 +81,99 @@ public class player {
 		}
 	}
 	
+        
+        //Constructor that you can use for testing.
+        //Set the strategy for the player with Dumb strat or Offensive plan.
+        //Only one strategy should be have a value and the other is null.
+        //If both parameters have values, strat is used in move planning.
+        //String name is name of player. Used for showing game details.
+        //The ArrayList is the premade deck passed.
+        //Draws is the numbers of draws the player does to get their hand.
+        public player(Dumb strat,Offensive plan,String name,ArrayList<Card> Cards,int draws){
+            Deck = new deck(Cards);
+            id = name;
+            planA = strat;
+            planB = plan;
+            for(int loop = 0;loop < draws;loop++){
+		getCard();
+            }
+        }
+        
+        
+        //Moved the deck creation from constructor to this function.
+        //By editing this function you create the default deck that player
+        //objects use.
+        public void defaultDeck(){
+            ArrayList <Card> Cards = new ArrayList <Card>();
+            Monsters group = new Monsters();
+		Spells powers = new Spells();
+                Cards.add(group.alien());
+		Cards.add(group.alien());
+		Cards.add(group.knight());
+		Cards.add(group.knight());
+		Cards.add(group.golem());
+		Cards.add(group.golem());
+		Cards.add(group.skeleton());
+		Cards.add(group.skeleton());
+		Cards.add(group.vampire());
+		Cards.add(group.vampire());
+		Cards.add(group.dwarf());
+		Cards.add(group.dwarf());
+		Cards.add(group.greebler());
+                Cards.add(group.greebler());
+		Cards.add(powers.shield);
+		Cards.add(powers.shield);
+		Cards.add(powers.sword);
+		Cards.add(powers.sword);
+		Cards.add(powers.sword);
+                Cards.add(powers.fireSword);
+                Cards.add(powers.iceShield);
+		Cards.add(powers.curse);
+		Cards.add(powers.curse);
+		Cards.add(powers.curse);
+		Deck = new deck(Cards);
+        }
+        
+        //Counts the up number of certain cards in the hand.
+        //Used by Strategy classes to add moves to arraylist for player to do.
+        public int[] countHand(){
+            int [] contents = new int[15];
+            for(int loop = 0; loop < hand.size(); loop++){
+                String spellName = hand.get(loop).getName();
+                switch (spellName){
+                    case "sword": contents[1]++;
+                        break;
+                    case "shield": contents[2]++;
+                        break;
+                    case "ice shield": contents[3]++;
+                        break;
+                    case "fire sword": contents[4]++;
+                        break;
+                    case "curse": contents[5]++;
+                        break;
+                    case "heal": contents[6]++;
+                        break;
+                    case "restore": contents[7]++;
+                        break;
+                    case "sacrifice": contents[8]++;
+                        break;
+                    case "doom": contents[9]++;
+                        break;
+                    case "forget": contents[10]++;
+                        break;
+                    case "gift": contents[11]++;
+                        break;
+                    case "fireball": contents[12]++;
+                        break;
+                    case "lightning": contents[13]++;
+                        break;
+                    case "strip": contents[14]++;
+                        break;
+                    default:contents[0]++;    
+                }
+            }
+            return contents;
+        }
 	
 	//Player draws a card from their deck.
 	//If they can't then they lost.
@@ -119,8 +183,7 @@ public class player {
 			hand.add(Deck.draw());
 		}
 		else{
-			lose = true;}
-		
+			lose = true;}	
 	}
 	
 	
@@ -145,64 +208,53 @@ public class player {
 	public int getHp(){ return health;}
 	
 	
-	//This functions checks if the player's hand has at least
-	//one monster. Returns true or false depending if there is
-	//a monster in the hand or not.
-	public boolean hasHandMonster(){
-		for (int loop = 0; loop < hand.size();loop++){
-			if(hand.get(loop).getType() == "monster"){
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	
-	
         //This function checks that the player has specific spell cards in their
         //hand. If so set a flag to corresponding space in double array.
-	public boolean[][] spellUse(){
-		boolean[][] spells = new boolean[3][2];
-		Arrays.fill(spells[0], false);
-		Arrays.fill(spells[1], false);
-		Arrays.fill(spells[2], false);
-		for (int loop = 0; loop < hand.size();loop++){
-			if(hand.get(loop).getName() == "sword"){
-				spells[0][0] = true;
-				break;
-			}
-		}
-		for (int loop = 0; loop < hand.size();loop++){
-			if(hand.get(loop).getName() == "shield"){
-				spells[1][0] = true;
-				break;
-			}
-		}
-		for (int loop = 0; loop < hand.size();loop++){
-			if(hand.get(loop).getName() == "curse"){
-				spells[2][0] = true;
-				break;
-			}
-		}
-		
+	public boolean[][] spellUse(int [] counts,player enemy){
+		boolean[][] spells = new boolean[14][2];
+
+                //Sets flag for true if certain spells in hand.
+		if(counts[1] > 0){ spells[0][0] = true;} //Sword
+                if(counts[2] > 0){ spells[1][0] = true;} //Shield
+		if(counts[3] > 0){ spells[2][0] = true;} //ice shield
+                if(counts[4] > 0){ spells[3][0] = true;} //fire sword
+                if(counts[5] > 0){ spells[4][0] = true;} //curse
+                if(counts[6] > 0){ spells[5][0] = true;} //heal
+                if(counts[7] > 0){ spells[6][0] = true;} //restore
+                if(counts[8] > 0){ spells[7][0] = true;} //sacrifice
+                if(counts[9] > 0){ spells[8][0] = true;} //doom
+                if(counts[10] > 0){ spells[9][0] = true;} //forget
+                if(counts[11] > 0){ spells[10][0] = true;} //gift
+                if(counts[12] > 0){ spells[11][0] = true;} //fireball
+                if(counts[13] > 0){ spells[12][0] = true;} //lightning
+                if(counts[14] > 0){ spells[13][0] = true;} //strip
+                
+                if(health <= 18){spells[6][1] = true;}
+                if(health <= 15 && field.size() > 1){spells[7][1] = true;}
+                if(Deck.getSize() > 2){spells[10][1] = true;}
+                if(enemy.hand.size() >= 2){spells[9][1] = true;}
+                if(!enemy.field.isEmpty()){
+                    spells[8][1] = true;
+                    spells[11][1] = true;
+                    spells[12][1] = true;
+                }
+                
 		for (int loop = 0; loop < field.size();loop++){
-			if(!field.get(loop).sword){
-				spells[0][1] = true;
-				break;
+			if(!field.get(loop).sword){spells[0][1] = true;}
+                        if(!field.get(loop).shield){ spells[1][1] = true;}
+                        if(!field.get(loop).firesword){spells[3][1] = true;}
+                        if(!field.get(loop).iceshield){spells[2][1] = true;}
+                        if(field.get(loop).getHp() <= field.get(loop).maxhp-2)
+                        {spells[5][1] = true;}
+                        if(field.get(loop).curse){spells[13][1] = true;}
+		}
+			
+		for (int loop = 0; loop < enemy.field.size();loop++){
+			if(!enemy.field.get(loop).curse){
+				spells[4][1] = true;
 			}
 		}
-		for (int loop = 0; loop < field.size();loop++){
-			if(!field.get(loop).shield){
-				spells[1][1] = true;
-				break;
-			}
-		}
-		for (int loop = 0; loop < field.size();loop++){
-			if(!field.get(loop).curse){
-				spells[2][1] = true;
-				break;
-			}
-		}
+                
 		return spells;
 	}
 	
@@ -213,6 +265,7 @@ public class player {
 	public boolean canAttack(){
 		for(int loop = 0; loop < field.size();loop++){
 			if(!field.get(loop).attacked && field.get(loop).getPlaced() <= 0){
+                            System.out.println(field.get(loop).getName() + " "+ field.get(loop).getPlaced());
 				return true;
 			}
 		}
@@ -238,7 +291,11 @@ public class player {
 	//Strategy changes which actions the player does.
 	//Main flow of the function is draw, summon, use spell, and attack.
 	public void turn(player enemy){
-		ArrayList <move> moves = new ArrayList<move>();
+		ArrayList <move> moves;
+                
+                //Draw Card
+		getCard();
+                
 		System.out.print(id+" hand:");
 		for (int loop = 0;loop < hand.size();loop++){
 			System.out.print(hand.get(loop).getName() + ", ");
@@ -250,17 +307,15 @@ public class player {
 		}
 		System.out.println("\n");
 		
-                //Draw Card
-		getCard();
                 
                 //If couldn't draw card, end turn to lose game.
 		if(lose){return;}
 		do{
 			if(planA != null){
-				moves = planA.pickMove(this, enemy.field);
+				moves = planA.pickMove(this, enemy);
 			}
 			else { 
-				moves = planB.pickMove(this, enemy.field);}
+				moves = planB.pickMove(this, enemy);}
 			for(int loop = 0; loop < moves.size();loop++){
                             moves.get(loop).execute(this, enemy);
                         }
@@ -268,7 +323,4 @@ public class player {
 		}while(!moves.isEmpty());
 		refresh();
 	}
-	
-	
-
 }

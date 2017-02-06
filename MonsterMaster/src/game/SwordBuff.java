@@ -20,6 +20,7 @@ public class SwordBuff implements move{
 	public void execute(player user, player enemy){
 		int pos = -1;
 		int highest = 0;
+                int healthy = 0;
 		int loc = 0;
 		for(int look = 0; look < user.hand.size(); look++){
 			if(user.hand.get(look).getName().equals("sword")){
@@ -29,13 +30,16 @@ public class SwordBuff implements move{
 		}
 		for(int loop = 0; loop < user.field.size(); loop++){
 			Monster mon = user.field.get(loop);
-				if(mon.getAtk() > highest && mon.getHp() == mon.maxhp && !mon.sword){
-					pos = loop;
-					highest = mon.getAtk();
+                        System.out.println(mon.getName()+" " + mon.getDef() +" " +mon.getHp());
+				if(mon.getAtk() > highest && mon.getHp() > healthy && !mon.sword){
+                                    pos = loop;
+                                    highest = mon.getAtk();
+                                    healthy = mon.getHp();
 				}
 			}
+                
 		if(pos != -1){
-                    user.hand.get(loc).effect(user, null, highest, pos);
+                    user.hand.get(loc).effect(user, null, pos, loc);
 		}
 	}
 }

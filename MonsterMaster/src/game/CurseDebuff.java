@@ -36,7 +36,7 @@ public class CurseDebuff implements move{
 				}
 			}
 		if(pos != -1){
-                    user.hand.get(loc).effect(null, enemy, highest, pos);
+                    user.hand.get(loc).effect(user, enemy, pos, loc);
 		}
 	}
 }

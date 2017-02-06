@@ -8,11 +8,11 @@ package game;
 import cards.Monster;
 
 /**
- * This is the class that uses the shield spell on a monster.
+ *
  * @author Michael
  */
-public class ShieldBuff implements move{
-        //Function will look through the player's field.
+public class FireBuff implements move{
+    //Function will look through the player's field.
 	//The function will select the player's monster with the highest defense 
 	//that does not already have a shield.
 	//The function will return the position of the selected monster.
@@ -23,14 +23,14 @@ public class ShieldBuff implements move{
                 int healthy = 0;
 		int loc = 0;
 		for(int look = 0; look < user.hand.size(); look++){
-			if(user.hand.get(look).getName().equals("shield")){
+			if(user.hand.get(look).getName().equals("fire sword")){
 				loc = look;
 				break;
 			}
 		}
 		for(int loop = 0; loop < user.field.size(); loop++){
 			Monster mon = user.field.get(loop);
-				if(mon.getDef() > highest && mon.getHp() > healthy && !mon.shield){
+				if(mon.getDef() > highest && mon.getHp() > healthy && !mon.firesword){
 					pos = loop;
 					highest = mon.getDef();
                                         healthy = mon.getHp();
@@ -40,5 +40,5 @@ public class ShieldBuff implements move{
                     user.hand.get(loc).effect(user, null, pos, loc);
 		}
 	}
-	   
+    
 }

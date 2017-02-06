@@ -8,7 +8,11 @@ package cards;
 import game.player;
 
 /**
- *
+ * Class that represents the Vampire monster Card.
+ * Strategy pattern was used in making this as it fit the best with 
+ * existing code more than Observer or Decorator.
+ * This card part of the homework assignment 1 and is changed to fit assignment
+ * 2.
  * @author Michael
  */
 public class Vampire extends Monster{
@@ -37,7 +41,7 @@ public class Vampire extends Monster{
                     enemy.field.get(target).setHp(dmg);
                     setHp(-dmg);
                     System.out.println("Vampire heals "+dmg + " health");
-                    if(enemy.field.get(target).getHp() == 0){
+                    if(enemy.field.get(target).getHp() <= 0){
                         System.out.println(enemy.field.get(target).getName() + " dies");
                         enemy.field.remove(target);}
 			}
@@ -46,5 +50,6 @@ public class Vampire extends Monster{
 			System.out.println(name +" attacks directly for "+ attack+ " damage.");
 				enemy.setHp(attack);
 			}
+            attacked = true;
         }
 }

@@ -52,6 +52,8 @@ public class Monster implements Card {
 	public boolean shield = false;
 	public boolean sword = false;
 	public boolean curse = false;
+        public boolean firesword = false;
+        public boolean iceshield = false;
 	
 	
 	//Flag that tells if the monster has attacked during the turn.
@@ -92,7 +94,7 @@ public class Monster implements Card {
 		}
 		else if(dmg > 0){
                     enemy.field.get(target).setHp(dmg);
-                    if(enemy.field.get(target).getHp() == 0){
+                    if(enemy.field.get(target).getHp() <= 0){
                         System.out.println(enemy.field.get(target).getName() + " dies");
                         enemy.field.remove(target);}
 			}
@@ -100,7 +102,7 @@ public class Monster implements Card {
                     else{
 			System.out.println(name +" attacks directly for "+ attack+ " damage.");
 				enemy.setHp(attack);
-			}
+            }
         }
         
         //This is the function that does battle calculations.
@@ -136,6 +138,7 @@ public class Monster implements Card {
 		int modifier = 0; 
 		if(sword){modifier += 2;}
 		if(curse){modifier -= 1;}
+                if(firesword){modifier += 4;}
 		return (attack + modifier); }
 	
 	public void setDef(int def){ defense = def;}
@@ -144,6 +147,7 @@ public class Monster implements Card {
 		int modifier = 0; 
 		if(shield){modifier += 2;}
 		if(curse){modifier -= 1;}
+                if(iceshield){modifier += 4;}
 		return (defense + modifier); }
 	
 	public void summoned(){ placed = cooldown;} 
@@ -155,8 +159,13 @@ public class Monster implements Card {
 	
 	public int getPlaced(){return placed;}
 	
+        
+        
+        //Setter for monster's health value.
+        //Positive numbers = damage
+        //Negative numbers = healing
 	public void setHp(int hp){
-		if((-hp + health) > maxhp){ health = hp;}
+		if((-hp + health) > maxhp){ health = maxhp;}
 		else {health -= hp;}
 	}
 	

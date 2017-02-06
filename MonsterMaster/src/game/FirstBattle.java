@@ -38,7 +38,6 @@ public class FirstBattle implements move{
 			//or not. Fight method only called if attacker's target is a monster.
 			//If not then full attack value is subtracted from opponent's health.
 			if(user.field.get(attacks).getPlaced() <= 0){
-				user.field.get(attacks).attacked = true;
                                 user.field.get(attacks).effect(user, enemy, pos,attacks);
                                 if(enemy.lose){break;}
 			}	
