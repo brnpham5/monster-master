@@ -231,7 +231,7 @@ public class player {
                 
                 if(health <= 18){spells[6][1] = true;}
                 if(health <= 15 && field.size() > 1){spells[7][1] = true;}
-                if(Deck.getSize() > 2){spells[10][1] = true;}
+                if(Deck.deckSize() > 2){spells[10][1] = true;}
                 if(enemy.hand.size() >= 2){spells[9][1] = true;}
                 if(!enemy.field.isEmpty()){
                     spells[8][1] = true;

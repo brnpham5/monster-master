@@ -8,7 +8,7 @@ package cards;
 import game.player;
 
 /**
- *
+ * Decorator Pattern
  * @author brnpham
  */
 public class Sacrifice extends Spell{
