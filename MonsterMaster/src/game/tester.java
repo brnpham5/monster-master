@@ -1,5 +1,9 @@
 package game;
 
+import game.strategy.Dumb;
+import game.strategy.Offensive;
+import cards.Spells;
+import cards.Monsters;
 import java.util.Scanner;
 
 import cards.*;
