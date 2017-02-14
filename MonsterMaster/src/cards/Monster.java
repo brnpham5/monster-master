@@ -1,5 +1,6 @@
 package cards;
 
+import cards.Card;
 import game.player;
 import java.util.concurrent.ThreadLocalRandom;
 
