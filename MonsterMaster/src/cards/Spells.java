@@ -1,5 +1,14 @@
 package cards;
 
+import cards.spells.Curse;
+import cards.spells.FireSword;
+import cards.spells.Heal;
+import cards.spells.IceShield;
+import cards.spells.Restore;
+import cards.spells.Sacrifice;
+import cards.spells.Shield;
+import cards.spells.Sword;
+
 public class Spells {
 	//Here's a list of all spells in the game except for a couple.
         //Not all have been implemented for this assignment.

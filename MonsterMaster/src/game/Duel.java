@@ -5,6 +5,8 @@
  */
 package game;
 
+import game.strategy.Dumb;
+import game.strategy.Offensive;
 import java.util.Scanner;
 
 /**
