@@ -1,5 +1,6 @@
 package game.strategy;
 
+import game.Strategy;
 import game.move;
 import game.player;
 import java.util.ArrayList;

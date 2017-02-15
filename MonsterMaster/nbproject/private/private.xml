@@ -3,26 +3,32 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/Spells.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/playerPackaage/playerInterface.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/player.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/Card.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/monsters/Knight.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/monsters/Greebler.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/monsters/Skeleton.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/playerPackaage/playerGrave.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/monsters/Golem.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/Game.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/playerPackaage/player.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/playerPackaage/playerHand.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/deck.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/playerPackaage/playerField.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/playerPackaage/playerDeck.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/Spell.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/monsters/Ninja.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/Strategy.java</file>
             <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/spells/Doom.java</file>
             <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/Duel.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/Spells.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/testcases/tester_restoreSpells.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/player.java</file>
             <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/Monsters.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/Card.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/FireBuff.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/FirstBattle.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/Dumb.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/CurseDebuff.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/Game.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/DefenseSummon.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/deck.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/monsters/Vampire.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/spells/FireSword.java</file>
             <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/tester.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/Strategy.java</file>
             <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/move.java</file>
             <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/Monster.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/IceBuff.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/Spell.java</file>
         </group>
     </open-files>
 </project-private>

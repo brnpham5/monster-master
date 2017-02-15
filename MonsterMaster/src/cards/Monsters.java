@@ -1,12 +1,6 @@
 package cards;
 
-import cards.monsters.Alien;
-import cards.monsters.Dwarf;
-import cards.monsters.Golem;
-import cards.monsters.Greebler;
-import cards.monsters.Knight;
-import cards.monsters.Skeleton;
-import cards.monsters.Vampire;
+import cards.monsters.*;
 
 public class Monsters {
 	//Here's a list of all monsters used in the demo.
