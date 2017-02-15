@@ -1,5 +1,6 @@
 package game.strategy;
 
+import game.Strategy;
 import java.util.ArrayList;
 
 import cards.Monster;

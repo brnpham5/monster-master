@@ -19,10 +19,10 @@ public class Doom extends Spell {
     
     public void effect(player owner, player enemy, int target, int position){
         int monstertodestroy; // int to hold the position of lowest attack monster
-        monstertodestroy = enemy.field.get(0).attack; //sets value to first spot field
+        monstertodestroy = enemy.field.get(0).getAtk(); //sets value to first spot field
         for (int counter= 0; counter < enemy.field.size();counter++){
-         if (monstertodestroy > enemy.field.get(counter).attack){
-             monstertodestroy = enemy.field.get(counter).attack;//iterates through array triest to find the position of lowest attack monster
+         if (monstertodestroy > enemy.field.get(counter).getAtk()){
+             monstertodestroy = enemy.field.get(counter).getAtk();//iterates through array triest to find the position of lowest attack monster
          }
         }
 

@@ -1,4 +1,4 @@
-package game.strategy;
+package game;
 
 import java.util.ArrayList;
 import cards.Monster;
