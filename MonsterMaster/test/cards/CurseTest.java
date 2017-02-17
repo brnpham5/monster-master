@@ -9,7 +9,7 @@ import cards.spells.Curse;
 import cards.monsters.Greebler;
 import game.strategy.Dumb;
 import game.strategy.Offensive;
-import game.player;
+import game.playerPackage.player;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;

@@ -6,7 +6,7 @@
 package cards.monsters;
 
 import cards.Monster;
-import game.player;
+import game.playerPackage.player;
 
 /**
  * Class that represents the Alien monster Card.

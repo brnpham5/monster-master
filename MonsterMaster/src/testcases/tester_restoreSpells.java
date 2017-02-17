@@ -9,7 +9,7 @@ import cards.Monsters;
 import cards.Spells;
 import game.strategy.Dumb;
 import game.strategy.Offensive;
-import game.player;
+import game.playerPackage.player;
 
 /**
  *

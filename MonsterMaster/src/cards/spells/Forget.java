@@ -5,7 +5,7 @@
  */
 package cards.spells;
 import cards.Spell;
-import game.player;
+import game.playerPackage.player;
 /**
  *
  * @author Dev
