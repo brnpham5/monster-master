@@ -7,7 +7,7 @@ package game.strategy;
 
 import cards.Monster;
 import game.move;
-import game.player;
+import game.playerPackage.player;
 
 /**
  * This is the class that uses the shield spell on a monster.

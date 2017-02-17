@@ -5,7 +5,7 @@
  */
 package cards.spells;
 import cards.Spell;
-import game.player;
+import game.playerPackage.player;
 
 /*
  *Doom selects the opponents monster with the lowest attack and removes/destroys it from the field

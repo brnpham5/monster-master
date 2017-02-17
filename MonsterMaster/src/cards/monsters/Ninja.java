@@ -5,7 +5,7 @@
  */
 package cards.monsters;
 import cards.Monster;
-import game.player;
+import game.playerPackage.player;
 
 /*
  *Nina is a monster with 3 health, 4 attack, 1 defense, a cooldown of 1

@@ -7,7 +7,7 @@ package game.strategy;
 
 import cards.Monster;
 import game.move;
-import game.player;
+import game.playerPackage.player;
 
 /**
  * This is the class to use the spell ice shield on a monster. 

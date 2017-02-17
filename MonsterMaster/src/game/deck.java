@@ -8,8 +8,6 @@ public class deck {
 	//The arraylist that will hold all cards that are currently in deck.
 	private ArrayList <Card> Cards;
 	
-	
-	
 	//Constructor that is used for testing.
 	//This will take in any set of cards.
 	//It will not check the size of the arraylist.

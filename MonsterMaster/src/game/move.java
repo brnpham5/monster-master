@@ -1,6 +1,9 @@
 package game;
 
 //Here is the move interface where you can can create various moves that the
+
+import game.playerPackage.player;
+
 //AI can make. You will need to fill in the execute function when implementing
 //this class. Other functions can be created to help those classes that 
 //implemented this.

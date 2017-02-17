@@ -8,7 +8,7 @@ package cards;
 import cards.monsters.Dragon;
 import cards.monsters.Golem;
 import game.strategy.Dumb;
-import game.player;
+import game.playerPackage.player;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
