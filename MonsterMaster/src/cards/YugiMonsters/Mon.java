@@ -6,13 +6,14 @@
 package cards.YugiMonsters;
 
 import cards.Monster;
-import game.YugiPlayer;
+import cards.YugiSpells.Magic;
+import game.playerPackage.YugiPlayer;
 
 
 /**
- *
+ * This is the parent monster card for Yugioh.
  * @author Michael
- * @version 1.0
+ * @version 1.1
  */
 public class Mon extends Monster{
 
@@ -126,43 +127,45 @@ public class Mon extends Monster{
     //corresponding target area.
     //Inside are the outcomes of the battle between the monsters. 
     public void attack(YugiPlayer owner, YugiPlayer enemy, int target, int position) {
+        Mon opponent = enemy.field.getMon(target);
         if(target == -1){enemy.setHp(getAtk());}
+        else if(target == -2){return;}
         else{
-            if(attack > enemy.field.get(target).getStat()){
-                if(enemy.field.get(target).attackPos){
-                    enemy.setHp(attack - enemy.field.get(target).getStat());
-                    enemy.field.get(target).deathEffect(owner, enemy, target);
-                    enemy.grave.add(enemy.field.get(target));
-                    enemy.field.remove(target);
+            if(attack > opponent.getStat()){
+                if(opponent.attackPos){
+                    enemy.setHp(attack - opponent.getStat());
+                    opponent.deathEffect(owner, enemy, target);
+                    enemy.grave.add(opponent);
+                    enemy.field.removeMon(target);
                 }
                 else {
-                    enemy.field.get(target).deathEffect(owner, enemy, position);
-                    enemy.grave.add(enemy.field.get(target));
-                    enemy.field.remove(target);
+                    opponent.deathEffect(owner, enemy, position);
+                    enemy.grave.add(opponent);
+                    enemy.field.removeMon(target);
                 }
             }
-            else if(attack < enemy.field.get(target).getStat()){
-                    if(enemy.field.get(target).attackPos){
-                        owner.setHp(enemy.field.get(target).getStat()-attack);
-                        owner.field.get(position).deathEffect(owner, enemy, position);
-                        owner.grave.add(owner.field.get(position));
-                        owner.field.remove(position);
+            else if(attack < opponent.getStat()){
+                    if(opponent.attackPos){
+                        owner.setHp(opponent.getStat()-attack);
+                        owner.field.getMon(position).deathEffect(owner, enemy, position);
+                        owner.grave.add(owner.field.getMon(position));
+                        owner.field.removeMon(position);
                     }
                 else {
-                    owner.setHp(enemy.field.get(target).getStat()-attack);
-                    enemy.field.get(target).flipped = true;
+                    owner.setHp(opponent.getStat()-attack);
+                    opponent.flipped = true;
                     }
             }
             else {
-                if(enemy.field.get(target).attackPos){
-                    enemy.field.get(target).deathEffect(owner, enemy, target);
-                    enemy.grave.add(enemy.field.get(target));
-                    enemy.field.remove(target);
-                    owner.field.get(position).deathEffect(owner, enemy, position);
-                    owner.grave.add(owner.field.get(position));
-                    owner.field.remove(position);
+                if(opponent.attackPos){
+                    opponent.deathEffect(owner, enemy, target);
+                    enemy.grave.add(opponent);
+                    enemy.field.removeMon(target);
+                    owner.field.getMon(position).deathEffect(owner, enemy, position);
+                    owner.grave.add(owner.field.getMon(position));
+                    owner.field.removeMon(position);
                 }else
-                    enemy.field.get(target).flipped = true;
+                    opponent.flipped = true;
             }
         }
     }
@@ -176,10 +179,31 @@ public class Mon extends Monster{
     
     
     
-    //If the monster has an effect that activates on removal from the field
-    //this function will be called to activate. Usually will be e,pty.
+
+    /**
+     * This is the function that activates an effect if it works on death and
+     * removes equipped spell cards.
+     * @param owner The owner of the monster.
+     * @param enemy The opposing player.
+     * @param position Position of the monster on the owner's field.
+     */
     public void deathEffect(YugiPlayer owner, YugiPlayer enemy, int position){
-        //Does nothing in this class.
+        int offset = 0;
+        for(int loop = 0; loop < 5;loop++){
+            if(equipped[loop]){
+                Magic spell = owner.field.getMagic(loop - offset);
+                spell.removedEffect(owner, enemy, position, loop-offset);
+                offset++;
+            }
+        }
+        offset = 5;
+        for(int loop = 5; loop < 10;loop++){
+            if(equipped[loop]){
+                Magic spell = enemy.field.getMagic(loop - offset);
+                spell.removedEffect(enemy, owner, position, loop-offset);
+                offset++;
+            }
+        }
     } 
     
     
@@ -190,7 +214,7 @@ public class Mon extends Monster{
     //Position is where the monster card is in the hand.
     //State is wheter or not the monster is summoned in attack position.
     public void summon(YugiPlayer owner, int position,boolean state){
-        owner.field.add(this);
+        owner.field.addMon(this);
         owner.hand.remove(position);
         if(state){ 
             attackPos = true;
@@ -215,12 +239,22 @@ public class Mon extends Monster{
     
     //Setter and getters of the different attributes of the monster.
     @Override
-    public int getAtk(){return attack + atkMod;}
+    public int getAtk(){
+        if(attack + atkMod < 0)
+            return 0;
+        else
+            return attack + atkMod;
+    }
     
     
     
     @Override
-    public int getDef(){return defense + defMod;}
+    public int getDef(){
+    if(defense + defMod < 0)
+            return 0;
+        else
+            return defense + defMod;
+    }
     
     
     
