@@ -22,7 +22,7 @@ public class DefenseSummon implements move{
 		int highestDef = 0;
 		int position = -1;
 		for(int loop = 0; loop < user.hand.size(); loop++){
-			if(user.hand.get(loop).getType() == "monster"){ 
+			if(user.hand.get(loop).getType().equals("monster")){ 
 				Monster mon = (Monster)user.hand.get(loop);
 				if(mon.getDef() > highestDef){
 					position = loop;

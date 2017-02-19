@@ -5,7 +5,6 @@
  */
 package game.playerPackage;
 
-import game.*;
 import game.strategy.*;
 
 /**
@@ -21,6 +20,8 @@ public interface playerInterface {
     public boolean[][] spellUse(int [] counts,player enemy);
     public boolean canAttack();
     public void turn(player enemy);
+    public boolean getLose();
+    public void setStrategy(Strategy strat);
     
     
 }

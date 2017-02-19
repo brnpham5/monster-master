@@ -6,15 +6,15 @@
 package game.strategy;
 
 import game.move;
-import game.player;
 import game.playerPackage.YugiPlayer;
+import game.playerPackage.player;
 import java.util.ArrayList;
 
 /**
  *
  * @author Michael
  */
-public class YugiStrategy{
+public class YugiStrategy implements Strategy{
 
     
     public ArrayList<move> pickMove(YugiPlayer user, YugiPlayer enemy) {
@@ -34,6 +34,12 @@ public class YugiStrategy{
     
     public void battlePhase(YugiPlayer user, YugiPlayer enemy){
         //Battle move
+    }
+
+    @Override
+    public ArrayList<move> pickMove(player user, player enemy) {
+        //does nothing
+        return new ArrayList();
     }
     
     

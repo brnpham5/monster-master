@@ -1,9 +1,8 @@
 package game.strategy;
 
-import game.Strategy;
+
 import java.util.ArrayList;
 
-import cards.Monster;
 import game.move;
 import game.playerPackage.player;
 
@@ -21,8 +20,9 @@ public class Dumb implements Strategy {
 	//they will. If the can't do any of the mention they pass.
 	//A move object is passed with flags telling the player what to
 	// do.
+        @Override
 	public ArrayList<move> pickMove(player user, player enemy){
-		ArrayList <move> moves = new ArrayList<move>();
+		ArrayList <move> moves = new ArrayList();
                 int [] contents = user.countHand();
 		if(contents[0] > 0 && !user.summoned){
 			moves.add(new FirstSummon());

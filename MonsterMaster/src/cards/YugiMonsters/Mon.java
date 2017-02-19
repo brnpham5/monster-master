@@ -5,6 +5,7 @@
  */
 package cards.YugiMonsters;
 
+import cards.Card;
 import cards.Monster;
 import cards.YugiSpells.Magic;
 import game.playerPackage.YugiPlayer;
@@ -15,7 +16,7 @@ import game.playerPackage.YugiPlayer;
  * @author Michael
  * @version 1.1
  */
-public class Mon extends Monster{
+public class Mon extends Monster implements Card{
 
     
     
@@ -128,9 +129,11 @@ public class Mon extends Monster{
     //Inside are the outcomes of the battle between the monsters. 
     public void attack(YugiPlayer owner, YugiPlayer enemy, int target, int position) {
         Mon opponent = enemy.field.getMon(target);
-        if(target == -1){enemy.setHp(getAtk());}
-        else if(target == -2){return;}
-        else{
+        switch(target){
+            case -1:
+                enemy.setHp(getAtk()); break;
+            case -2: return;
+            default:
             if(attack > opponent.getStat()){
                 if(opponent.attackPos){
                     enemy.setHp(attack - opponent.getStat());
@@ -213,9 +216,9 @@ public class Mon extends Monster{
     //Owner = player object that is summoning monster.
     //Position is where the monster card is in the hand.
     //State is wheter or not the monster is summoned in attack position.
-    public void summon(YugiPlayer owner, int position,boolean state){
+    public void summon(YugiPlayer owner,boolean state){
         owner.field.addMon(this);
-        owner.hand.remove(position);
+        owner.hand.remove(this);
         if(state){ 
             attackPos = true;
             flipped = true;

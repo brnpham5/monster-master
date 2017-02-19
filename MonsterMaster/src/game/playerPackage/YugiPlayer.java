@@ -9,6 +9,9 @@ import cards.Card;
 import cards.YugiMonsters.*;
 import cards.YugiSpells.*;
 import game.move;
+import game.strategy.DumbYugi;
+import game.strategy.OffensiveYugi;
+import game.strategy.Strategy;
 import game.strategy.YugiStrategy;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -33,12 +36,6 @@ public class YugiPlayer extends player{
     //position is attack.
     public YugiPlayerField field = new YugiPlayerField();
 	
-    
-    //Variable is flag that tells if the player has lost or not.
-    //Will only switch to true if the player can't draw or lost
-    //all of their health points.
-    public boolean lose = false;
-        
         
     
     //Variable that determines if the dumb strategy will be used
@@ -47,13 +44,6 @@ public class YugiPlayer extends player{
     YugiStrategy plan;
 
     
-    
-    
-    //
-    public YugiPlayer(YugiStrategy strat,String name){
-        super(null,null,name);
-        plan = strat;
-    }
     
     @Override
     public void defaultDeck() {
@@ -78,6 +68,12 @@ public class YugiPlayer extends player{
         Deck = new playerDeck(Cards);
     }
 
+       //
+    public YugiPlayer(YugiStrategy strat,String name){
+        super(null,null,name);
+        plan = strat;
+    }
+    
     @Override
     public int[] countHand() {
         int [] contents = new int[13];
@@ -143,35 +139,18 @@ public class YugiPlayer extends player{
         health -= dmg;
         if (health <= 0){lose = true;}
     }
-
     
     
-    /**
-     * Returns the player's health point value
-     * @return Player's health point value.
-     */
-    @Override
-    public int getHp() {return health;}
-    
-    
-    
-    
-    @Override
-    public boolean[][] spellUse(int[] counts, player enemy) {
-        return new boolean [1][1];}
-    
-    
-    
-    
+        
     public boolean[][] spellUse(int[] counts, YugiPlayer enemy) {
         boolean[][] spells = new boolean[13][2];
         
         if(field.magicSize() >= field.MAXSIZE){ return spells;}
         
          //Sets flag for true if certain spells in hand.
-	if(counts[1] > 0){ spells[0][0] = true;} //Sword
-        if(counts[2] > 0){ spells[1][0] = true;} //Shield
-	if(counts[3] > 0){ spells[2][0] = true;} //ice shield
+	if(counts[1] > 0){ spells[0][0] = true;} //Berserker Sword
+        if(counts[2] > 0){ spells[1][0] = true;} //Tower Shield
+	if(counts[3] > 0){ spells[2][0] = true;} //Soul Shield
         if(counts[4] > 0){ spells[3][0] = true;} //Salamandra
         if(counts[5] > 0){ spells[4][0] = true;} //Nephthys Curse
         if(counts[6] > 0){ //heal spells
@@ -224,8 +203,7 @@ public class YugiPlayer extends player{
         return false;
     }
 
-    @Override
-    public void turn(player enemy){}
+
     
     public void turn(YugiPlayer enemy) {
         plan.drawPhase(this);
@@ -258,4 +236,17 @@ public class YugiPlayer extends player{
                     hand.remove(position);
                 }
 	}
+
+    @Override
+    public boolean getLose() {
+        return lose;
+    }
+
+    @Override
+    public void setStrategy(Strategy strat) {
+        if(strat instanceof DumbYugi)
+            plan = new DumbYugi();
+        else 
+            plan = new OffensiveYugi();
+    }
 }

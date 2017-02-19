@@ -160,6 +160,7 @@ public class Monster implements Card {
 	
 	public int getPlaced(){return placed;}
 	
+        public void setPlaced(int value){placed = value;}
         
         
         //Setter for monster's health value.

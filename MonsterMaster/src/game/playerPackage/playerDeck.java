@@ -17,9 +17,10 @@ public class playerDeck {
     //The arraylist that will hold all cards that are currently in deck.
     private ArrayList <Card> Cards;
 
-    public playerDeck(){
-        
-    }
+    
+    
+    public playerDeck(){}
+    
     
     //Constructor that is used for testing.
     //This will take in any set of cards.
@@ -43,7 +44,7 @@ public class playerDeck {
     //Makes sure there is cards in the deck.
     //This is used to make sure the player loses to no 
     //cards drawn.
-    public boolean checkDeck(){ return (Cards.size() != 0); }
+    public boolean checkDeck(){ return !(Cards.isEmpty()); }
 	
     //Function to check the size of the deck
     //Will be used in other classes to check deck size for
@@ -56,7 +57,7 @@ public class playerDeck {
     //take a deck then randomize the contents and return it in a 
     //different ArrayList.
     public ArrayList<Card> shuffle(ArrayList <Card> Deck){
-    	ArrayList <Card> pile = new ArrayList <Card>();
+    	ArrayList <Card> pile = new ArrayList();
     	int cap = Deck.size();
     	for (int loop = 0; loop < cap;loop++){
             int position = ThreadLocalRandom.current().nextInt(0, Deck.size());
@@ -65,5 +66,4 @@ public class playerDeck {
         }
             return pile;
     }
-    
 }

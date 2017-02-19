@@ -234,7 +234,7 @@ public class YugiPlayerField{
      */
     public boolean findFamily(int family){
         for(Mon card : monsters){
-            if(card.getEle() == family)
+            if(card.getFam() == family)
                 return true;
         }
         return false;

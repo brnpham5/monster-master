@@ -6,7 +6,11 @@
 package game.strategy;
 
 import cards.Monster;
+import cards.YugiMonsters.Mon;
+import cards.YugiSpells.TowerShield;
+import cards.spells.Shield;
 import game.move;
+import game.playerPackage.YugiPlayer;
 import game.playerPackage.player;
 
 /**
@@ -14,6 +18,25 @@ import game.playerPackage.player;
  * @author Michael
  */
 public class ShieldBuff implements move{
+    
+    
+    
+    public void execute(YugiPlayer user,YugiPlayer enemy){
+        System.out.println("\nYgui");
+        int pos = -1;
+	int highest = 0;
+	for(int loop = 0; loop < user.field.monSize(); loop++){
+            Mon mon = user.field.getMon(loop);
+            if(mon.getDef() > highest && mon.flipped){
+		pos = loop;
+		highest = mon.getDef();
+            }
+	}
+	if(pos != -1){
+            user.hand.getCard(new TowerShield()).effect(user, null, pos, 0);
+	}
+    }
+    
         //Function will look through the player's field.
 	//The function will select the player's monster with the highest defense 
 	//that does not already have a shield.
