@@ -45,6 +45,10 @@ public class playerField {
         list.add(card);
     }
     
+    public void add(int position, Monster card){
+        list.add(position, card);
+    }
+    
     public void remove(Monster card){
         list.remove(card);
     }

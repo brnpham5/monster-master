@@ -6,7 +6,7 @@
 package game.strategy;
 
 import game.move;
-import game.player;
+import game.playerPackage.player;
 import game.playerPackage.YugiPlayer;
 import java.util.ArrayList;
 

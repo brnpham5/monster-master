@@ -47,7 +47,10 @@ public class YugiPlayer extends player{
     YugiStrategy plan;
 
     
-    
+    public YugiPlayer(){
+        super(null,null,"Default");
+        plan = null;
+    }
     
     //
     public YugiPlayer(YugiStrategy strat,String name){

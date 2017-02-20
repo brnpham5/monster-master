@@ -45,6 +45,10 @@ public class playerHand {
         list.add(card);
     }
     
+    public void add(int position, Card card){
+        list.add(position, card);
+    }
+    
     public void remove(Card card){
         list.remove(card);
     }

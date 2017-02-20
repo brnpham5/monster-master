@@ -22,5 +22,14 @@ public interface playerInterface {
     public boolean canAttack();
     public void turn(player enemy);
     
+    //public attack(int position, int target);
+    //public bool canAttack ();
+    //public int countHand ();
+    //public bool draw();
+    //public void discard (int card);
+    //public void endTurn();
+    //public void playCard(int position);
+    //public void printHand();
+    
     
 }
