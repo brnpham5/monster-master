@@ -21,7 +21,7 @@ public class Factory {
             return new player();
          
         } else if(playerType.equalsIgnoreCase("YuGiOh")){
-            return new yugiPlayer();
+            return new YugiPlayer();
          
         } 
         return null;

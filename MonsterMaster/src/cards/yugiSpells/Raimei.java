@@ -5,24 +5,21 @@
  */
 package cards.yugiSpells;
 
-import game.playerPackage.player;
 import game.playerPackage.YugiPlayer;
 
 /**
- * This is the fireball spell from monster master turned into the hinotama
- * spell card in yugioh. The spell card does 500 points of damage to enemy 
- * player.
- * @author Michael
+ *
+ * @author brnpham
  */
-public class Hinotama extends Magic{
-    public Hinotama(){
-        super("Hinotama",1);
+public class Raimei extends Magic{
+    public Raimei(){
+        super("Raimei",1);
     }
     
     
     @Override
     public void effect(YugiPlayer owner, YugiPlayer enemy, int target, int position){
-            owner.setHp(500);
+            owner.setHp(300);
             owner.grave.add(this);
             System.out.println(owner.id + " used Hinotama.");
             
