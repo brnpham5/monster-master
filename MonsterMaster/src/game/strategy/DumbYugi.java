@@ -21,7 +21,7 @@ public class DumbYugi extends YugiStrategy{
         int [] count = user.countHand();
         if(count[0] > 0)
             moves.add(new FirstSummon());
-        return new ArrayList();
+        return moves;
     }
     
     

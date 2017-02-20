@@ -25,7 +25,6 @@ public class NephthysCurse extends Magic{
             Mon monster = enemy.field.getMon(target);
             monster.atkMod += monster.getLvl() * 200;
             monster.defMod += monster.getLvl() * 200;
-            owner.hand.remove(position);
             owner.grave.add(this);
             System.out.println(owner.id + " used Nephthy's Curse on "+ monster.getName() + ".");
             

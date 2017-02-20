@@ -18,7 +18,7 @@ public class FissureSpell implements move{
     
     
     
-    public void execute(YugiPlayer user,YugiPlayer enemy){
+    public void executeY(YugiPlayer user,YugiPlayer enemy){
         //user.hand.getCard(new Fissure()).effect(user,enemy,0,0); Need to add magic card
     }
     

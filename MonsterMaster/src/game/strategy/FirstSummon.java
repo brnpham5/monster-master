@@ -24,7 +24,8 @@ public class FirstSummon implements move{
      * @param user Player taking the turn
      * @param enemy Opposing player
      */
-    public void execute(YugiPlayer user,YugiPlayer enemy){  
+    @Override
+    public void executeY(YugiPlayer user,YugiPlayer enemy){  
         Mon monster = null;
 	for(int loop = 0; loop < user.hand.size(); loop++){
             if(user.hand.get(loop).getType().equals("monster")){ 

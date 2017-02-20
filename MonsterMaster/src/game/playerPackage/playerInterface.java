@@ -17,9 +17,7 @@ public interface playerInterface {
     public void getCard();
     public void setHp(int dmg);
     public int getHp();
-    public boolean[][] spellUse(int [] counts,player enemy);
     public boolean canAttack();
-    public void turn(player enemy);
     public boolean getLose();
     public void setStrategy(Strategy strat);
     

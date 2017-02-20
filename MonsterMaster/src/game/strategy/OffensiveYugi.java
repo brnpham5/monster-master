@@ -17,7 +17,7 @@ public class OffensiveYugi extends YugiStrategy{
     public ArrayList<move> pickMove(YugiPlayer user, YugiPlayer enemy) {
         ArrayList <move> moves = new ArrayList();
         int [] count = user.countHand();
-        boolean [][] usage = user.spellUse(count, enemy);
+        boolean [][] usage = user.spellUse(count, enemy); 
         
         if(count[0] > 0 && !user.summoned){
             moves.add(new AttackSummon());

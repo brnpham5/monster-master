@@ -6,8 +6,8 @@
 package game.strategy;
 
 import cards.Monster;
-import cards.spells.Sword;
 import game.move;
+import game.playerPackage.YugiPlayer;
 import game.playerPackage.player;
 
 /**
@@ -36,15 +36,23 @@ public class SwordBuff implements move{
 		}
 		for(int loop = 0; loop < user.field.size(); loop++){
 			Monster mon = user.field.get(loop);
+                        System.out.println(mon.getName()+" "+mon.getAtk());
 			if(mon.getAtk() > highest && mon.getHp() > healthy && !mon.sword){
+                            System.out.println("tre");
                             pos = loop;
                             highest = mon.getAtk();
                             healthy = mon.getHp();
 			}
 			}
-                
+                System.out.println(pos);
 		if(pos != -1){
+                    System.out.println(user.hand.get(loc).toString());
                     user.hand.get(loc).effect(user, null, pos, loc);
 		}
 	}
+
+    @Override
+    public void executeY(YugiPlayer user, YugiPlayer enemy) {
+        //nothing
+    }
 }

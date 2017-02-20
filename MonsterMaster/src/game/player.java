@@ -1,18 +1,17 @@
-package game.playerPackage;
+package game;
 import game.strategy.Dumb;
 import game.strategy.Offensive;
 import cards.Spells;
 import cards.Monsters;
+import cards.Monster;
 import cards.*;
-import game.move;
-import game.strategy.Strategy;
 
 import java.util.ArrayList;
 
 //This class will represent the players of the game.
 //The class holds their deck, hand, graveyard, and active monsters.
 //The class also holds how much life they have and the flag for when they lose.
-public class player implements playerInterface{
+public class player {
 	
 	//int value that represents how much life the player has 
 	//in game. When this goes to 0 or below then player loses.
@@ -21,22 +20,24 @@ public class player implements playerInterface{
 	
 	//Variable that holds all the cards in the players deck.
 	//Will be used to add cards to hand or summon skeletons through spell.
-        public playerDeck Deck = new playerDeck();
+	public deck Deck;
 	
 	
 	//Variable that holds all cards in player's hand
 	//These cards are playable by the player.
-        public playerHand hand = new playerHand();
+	public ArrayList <Card> hand = new ArrayList <Card>();
 	
 	
 	//Variable that holds all used up spells or killed monsters.
 	//These cards will remain here unless beckon or necromancy spell is used.
-	public playerGrave grave = new playerGrave();
+	public ArrayList <Card> grave = new ArrayList <Card>();
+	
 	
 	//Variable that holds the monsters that protects the player.
 	//These monsters can attack the enemy if the attacking monster's
 	//cooldown is 0.
-	public playerField field = new playerField();
+	public ArrayList <Monster> field = new ArrayList <Monster>();
+	
 	
 	//Variable is flag that tells if the player has lost or not.
 	//Will only switch to true if the player can't draw or lost
@@ -94,7 +95,7 @@ public class player implements playerInterface{
         //The ArrayList is the premade deck passed.
         //Draws is the numbers of draws the player does to get their hand.
         public player(Dumb strat,Offensive plan,String name,ArrayList<Card> Cards,int draws){
-            Deck = new playerDeck(Cards);
+            Deck = new deck(Cards);
             id = name;
             planA = strat;
             planB = plan;
@@ -107,9 +108,8 @@ public class player implements playerInterface{
         //Moved the deck creation from constructor to this function.
         //By editing this function you create the default deck that player
         //objects use.
-        @Override
         public void defaultDeck(){
-            ArrayList <Card> Cards = new ArrayList();
+            ArrayList <Card> Cards = new ArrayList <Card>();
             Monsters group = new Monsters();
 		Spells powers = new Spells();
                 Cards.add(group.alien());
@@ -136,12 +136,11 @@ public class player implements playerInterface{
 		Cards.add(powers.curse());
 		Cards.add(powers.curse());
 		Cards.add(powers.curse());
-		Deck = new playerDeck(Cards);
+		Deck = new deck(Cards);
         }
         
         //Counts the up number of certain cards in the hand.
         //Used by Strategy classes to add moves to arraylist for player to do.
-        @Override
         public int[] countHand(){
             int [] contents = new int[15];
             for(int loop = 0; loop < hand.size(); loop++){
@@ -184,7 +183,6 @@ public class player implements playerInterface{
 	//Player draws a card from their deck.
 	//If they can't then they lost.
 	//Program  checks if they can draw before getting card from deck.
-        @Override
 	public void getCard(){
 		if(Deck.checkDeck()){
 			hand.add(Deck.draw());
@@ -272,7 +270,8 @@ public class player implements playerInterface{
 	public boolean canAttack(){
 		for(int loop = 0; loop < field.size();loop++){
 			if(!field.get(loop).attacked && field.get(loop).getPlaced() <= 0){
-                            return true;
+                            System.out.println(field.get(loop).getName() + " "+ field.get(loop).getPlaced());
+				return true;
 			}
 		}
 		return false;
@@ -296,7 +295,7 @@ public class player implements playerInterface{
 	//This is how the player interacts when on their turn happens.
 	//Strategy changes which actions the player does.
 	//Main flow of the function is draw, summon, use spell, and attack.
-        public void turn(player enemy){
+	/*public void turn(player enemy){
 		ArrayList <move> moves;
                 
                 //Draw Card
@@ -328,19 +327,5 @@ public class player implements playerInterface{
                 if(enemy.lose){return;}
 		}while(!moves.isEmpty());
 		refresh();
-	}
-
-    @Override
-    public boolean getLose() {
-        return lose;
-    }
-
-    @Override
-    public void setStrategy(Strategy strat) {
-        if(strat instanceof Dumb)
-            planA = new Dumb();
-        else 
-            planB = new Offensive();
-    }
-        
+	}*/
 }

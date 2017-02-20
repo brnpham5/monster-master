@@ -131,17 +131,22 @@ public class Mon extends Monster implements Card{
         Mon opponent = enemy.field.getMon(target);
         switch(target){
             case -1:
+                System.out.println(name +" attacks "+ enemy.id);
                 enemy.setHp(getAtk()); break;
             case -2: return;
             default:
+                System.out.println(name +" attacks "+ opponent.name);
             if(attack > opponent.getStat()){
                 if(opponent.attackPos){
+                    System.out.println(name +" killed "+ opponent.name+
+                                       " and deals "+ (attack - opponent.getStat()) + " damage");
                     enemy.setHp(attack - opponent.getStat());
                     opponent.deathEffect(owner, enemy, target);
                     enemy.grave.add(opponent);
                     enemy.field.removeMon(target);
                 }
                 else {
+                    System.out.println(name +" killed "+ opponent.name);
                     opponent.deathEffect(owner, enemy, position);
                     enemy.grave.add(opponent);
                     enemy.field.removeMon(target);
@@ -149,18 +154,22 @@ public class Mon extends Monster implements Card{
             }
             else if(attack < opponent.getStat()){
                     if(opponent.attackPos){
+                        System.out.println(name +" is killed and "+ owner.id +
+                                           " takes "+ (opponent.getStat()-attack) + " damage.");
                         owner.setHp(opponent.getStat()-attack);
                         owner.field.getMon(position).deathEffect(owner, enemy, position);
                         owner.grave.add(owner.field.getMon(position));
                         owner.field.removeMon(position);
                     }
                 else {
+                    System.out.println(owner.id +" takes "+ (opponent.getStat()-attack) +" damage.");
                     owner.setHp(opponent.getStat()-attack);
                     opponent.flipped = true;
                     }
             }
             else {
                 if(opponent.attackPos){
+                    System.out.println(name+" and "+ opponent.name+" died." );
                     opponent.deathEffect(owner, enemy, target);
                     enemy.grave.add(opponent);
                     enemy.field.removeMon(target);
@@ -194,7 +203,8 @@ public class Mon extends Monster implements Card{
         int offset = 0;
         for(int loop = 0; loop < 5;loop++){
             if(equipped[loop]){
-                Magic spell = owner.field.getMagic(loop - offset);
+                owner.field.print();
+                Magic spell = owner.field.getMagic((loop - offset));
                 spell.removedEffect(owner, enemy, position, loop-offset);
                 offset++;
             }

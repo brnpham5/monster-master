@@ -20,7 +20,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @author Michael
  */
-public class YugiPlayer extends player{
+public class YugiPlayer implements playerInterface{
 
     
     
@@ -29,7 +29,20 @@ public class YugiPlayer extends player{
     private int health = 4000;
 
 	
-    
+
+    //Variable that holds all the cards in the players deck.
+    //Will be used to add cards to hand or summon skeletons through spell.
+    public playerDeck Deck = new playerDeck();
+	
+	
+    //Variable that holds all cards in player's hand
+    //These cards are playable by the player.
+    public playerHand hand = new playerHand();
+	
+	
+    //Variable that holds all used up spells or killed monsters.
+    //These cards will remain here unless beckon or necromancy spell is used.
+    public playerGrave grave = new playerGrave();    
     
     //Variable that holds the monsters that protects the player.
     //These monsters can attack the enemy if the attacking monster's
@@ -43,6 +56,37 @@ public class YugiPlayer extends player{
     //user choses n at starting prompt.
     YugiStrategy plan;
 
+    
+    //Variable is flag that tells if the player has lost or not.
+	//Will only switch to true if the player can't draw or lost
+	//all of their health points.
+	public boolean lose = false;
+        
+        
+        
+    //A simple string that holds the name of the player.
+	//Only used in tester for display purposes while output
+	//runs to see what is happening. 
+	public String id;
+	
+	
+        
+        //Flag that tells that the player has summoned a monster.
+        //This will be turned true after executing a summoning move.
+        //The flag is turned false at the end of the player's turn.
+	public boolean summoned = false;
+        
+        
+
+       //
+    public YugiPlayer(YugiStrategy strat,String name){
+        plan = strat;
+        id  = name;
+        defaultDeck();
+        for(int draw = 0; draw < 4;draw++){
+            getCard();
+        }
+    }
     
     
     @Override
@@ -67,12 +111,7 @@ public class YugiPlayer extends player{
         Cards.add(new TowerShield());
         Deck = new playerDeck(Cards);
     }
-
-       //
-    public YugiPlayer(YugiStrategy strat,String name){
-        super(null,null,name);
-        plan = strat;
-    }
+    
     
     @Override
     public int[] countHand() {
@@ -205,7 +244,7 @@ public class YugiPlayer extends player{
 
 
     
-    public void turn(YugiPlayer enemy) {
+    public void turn(YugiPlayer enemy,int turn) {
         plan.drawPhase(this);
         if(lose){return;}
         System.out.println("Hand");
@@ -213,9 +252,10 @@ public class YugiPlayer extends player{
         System.out.println("Field");
         field.print();
         for(move action:plan.mainPhase(this, enemy)){
-            action.execute(this, enemy);
+            action.executeY(this, enemy);
         }
-        plan.battlePhase(this, enemy);
+        if(turn != 1)
+            plan.battlePhase(this, enemy);
         endphase();
     }
 
@@ -249,4 +289,7 @@ public class YugiPlayer extends player{
         else 
             plan = new OffensiveYugi();
     }
+
+    @Override
+    public int getHp() { return health;}
 }

@@ -18,7 +18,13 @@ import game.playerPackage.player;
  */
 public class IceBuff implements move{
     
-    public void execute(YugiPlayer user, YugiPlayer enemy){
+    /**
+     * Move for Yugioh AI to use soul shield on a monster
+     * @param user The player using the soul shield 
+     * @param enemy The opposing player
+     */
+    @Override
+    public void executeY(YugiPlayer user, YugiPlayer enemy){
 	int pos = -1;
 	int highest = 0;
 	for(int loop = 0; loop < user.field.monSize(); loop++){
@@ -30,7 +36,9 @@ public class IceBuff implements move{
 	}
                 
 	if(pos != -1){
-            user.hand.getCard(new SoulShield()).effect(user, null, pos, 0);
+            SoulShield card = new SoulShield();
+            user.hand.list.remove(card);
+            card.effect(user, null, pos, 0);
 	}
 	}
     

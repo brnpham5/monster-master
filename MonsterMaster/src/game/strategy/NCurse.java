@@ -19,7 +19,7 @@ public class NCurse implements move{
 
     
     
-    public void execute(YugiPlayer user, YugiPlayer enemy){
+    public void executeY(YugiPlayer user, YugiPlayer enemy){
         int pos = -1;
 	int highest = 0;
 	for(int loop = 0; loop < enemy.field.monSize(); loop++){
@@ -31,7 +31,9 @@ public class NCurse implements move{
 	}
                 
 	if(pos != -1){
-            user.hand.getCard(new NephthysCurse()).effect(user,enemy,pos,0);
+            NephthysCurse card = new NephthysCurse();
+            user.hand.getCard(new NephthysCurse());
+            card.effect(user,enemy,pos,0);
         }
     }
     

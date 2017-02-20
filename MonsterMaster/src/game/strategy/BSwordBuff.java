@@ -16,7 +16,7 @@ import game.playerPackage.player;
  * @author Michael
  */
 public class BSwordBuff implements move{
-    public void execute(YugiPlayer user, YugiPlayer enemy){
+    public void executeY(YugiPlayer user, YugiPlayer enemy){
 		int pos = -1;
 		int highest = 0;
 		for(int loop = 0; loop < user.field.monSize(); loop++){
@@ -28,7 +28,9 @@ public class BSwordBuff implements move{
 		}
                 
 		if(pos != -1){
-                    user.hand.getCard(new BerserkerSword()).effect(user, null, pos, 0);
+                    BerserkerSword card = new BerserkerSword();
+                    user.hand.list.remove(new BerserkerSword());
+                    card.effect(user, null, pos, 0);
 		}
 	}
 

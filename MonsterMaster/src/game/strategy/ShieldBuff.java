@@ -8,7 +8,6 @@ package game.strategy;
 import cards.Monster;
 import cards.YugiMonsters.Mon;
 import cards.YugiSpells.TowerShield;
-import cards.spells.Shield;
 import game.move;
 import game.playerPackage.YugiPlayer;
 import game.playerPackage.player;
@@ -21,8 +20,8 @@ public class ShieldBuff implements move{
     
     
     
-    public void execute(YugiPlayer user,YugiPlayer enemy){
-        System.out.println("\nYgui");
+    public void executeY(YugiPlayer user,YugiPlayer enemy){
+
         int pos = -1;
 	int highest = 0;
 	for(int loop = 0; loop < user.field.monSize(); loop++){
@@ -33,7 +32,9 @@ public class ShieldBuff implements move{
             }
 	}
 	if(pos != -1){
-            user.hand.getCard(new TowerShield()).effect(user, null, pos, 0);
+            TowerShield card = new TowerShield();
+            user.hand.getCard(new TowerShield());
+            card.effect(user, null, pos, 0);
 	}
     }
     

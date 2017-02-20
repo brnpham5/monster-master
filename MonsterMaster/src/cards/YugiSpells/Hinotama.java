@@ -5,7 +5,6 @@
  */
 package cards.YugiSpells;
 
-import game.player;
 import game.playerPackage.YugiPlayer;
 
 /**

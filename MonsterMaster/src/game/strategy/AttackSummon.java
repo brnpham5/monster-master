@@ -19,7 +19,7 @@ public class AttackSummon implements move{
     
     
     
-    public void execute(YugiPlayer user,YugiPlayer enemy){
+    public void executeY(YugiPlayer user,YugiPlayer enemy){
 	int highestAtk = 0;
 	int position = -1;
 	for(int loop = 0; loop < user.hand.size(); loop++){
@@ -46,7 +46,9 @@ public class AttackSummon implements move{
     //Function will return the highest attack value that the program
     //first encounters. If no monsters are encountered return null.
     //This function is used by the offensive strategy.
+    @Override
 	public void execute(player user,player enemy){
+            
 		Monster monster;
 		int highestAtk = 0;
 		int position = -1;

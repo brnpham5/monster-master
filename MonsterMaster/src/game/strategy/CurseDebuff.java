@@ -7,8 +7,8 @@ package game.strategy;
 
 import cards.Monster;
 import game.move;
+import game.playerPackage.YugiPlayer;
 import game.playerPackage.player;
-import java.util.ArrayList;
 
 /**
  * This is the class that uses the curse spell on a monster.
@@ -41,4 +41,9 @@ public class CurseDebuff implements move{
                     user.hand.get(loc).effect(user, enemy, pos, loc);
 		}
 	}
+
+    @Override
+    public void executeY(YugiPlayer user, YugiPlayer enemy) {
+    //nothing    
+    }
 }
