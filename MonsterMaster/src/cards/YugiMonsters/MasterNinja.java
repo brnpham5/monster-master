@@ -5,7 +5,7 @@
  */
 package cards.YugiMonsters;
 
-import game.YugiPlayer;
+import game.playerPackage.YugiPlayer;
 
 /**
  * This is the ninja card from monster master translated to yugioh card format.
@@ -20,8 +20,8 @@ public class MasterNinja extends Mon{
     
     @Override
     public void effect(YugiPlayer owner, YugiPlayer enemy, int target, int position){
-        enemy.grave.add(enemy.field.get(target));
-        enemy.field.remove(target);
+        enemy.grave.add(enemy.field.getMon(target));
+        enemy.field.removeMon(target);
     }
     
     
@@ -29,41 +29,42 @@ public class MasterNinja extends Mon{
     @Override
     //
     public void attack(YugiPlayer owner, YugiPlayer enemy, int target, int position) {
+        Mon opponent = enemy.field.getMon(target);
         if(target == -1){enemy.setHp(getAtk());}
-        else if(!enemy.field.get(target).flipped){effect(owner,enemy,target,position);}
+        else if(!opponent.flipped){effect(owner,enemy,target,position);}
         else{
-            if(attack > enemy.field.get(target).getStat()){
-                if(enemy.field.get(target).attackPos){
-                    enemy.setHp(attack - enemy.field.get(target).getStat());
-                    enemy.field.get(target).deathEffect(owner, enemy, target);
-                    enemy.grave.add(enemy.field.get(target));
-                    enemy.field.remove(target);
+            if(attack > enemy.field.getMon(target).getStat()){
+                if(opponent.attackPos){
+                    opponent.deathEffect(owner, enemy, position);
+                    enemy.grave.add(opponent);
+                    enemy.field.removeMon(target);
                 }
                 else {
-                    enemy.field.get(target).deathEffect(owner, enemy, position);
-                    enemy.grave.add(enemy.field.get(target));
-                    enemy.field.remove(target);
+                    enemy.setHp(attack - opponent.getStat());
+                    opponent.deathEffect(owner, enemy, target);
+                    enemy.grave.add(opponent);
+                    enemy.field.removeMon(target);
                 }
             }
-            else if(attack < enemy.field.get(target).getStat()){
-                    if(enemy.field.get(target).attackPos){
-                        owner.setHp(enemy.field.get(target).getStat()-attack);
-                        owner.field.get(position).deathEffect(owner, enemy, position);
+            else if(attack < opponent.getStat()){
+                    if(opponent.attackPos){
+                        owner.setHp(opponent.getStat()-attack);
+                        owner.field.getMon(position).deathEffect(owner, enemy, position);
                         owner.grave.add(this);
-                        owner.field.remove(position);
+                        owner.field.removeMon(position);
                     }
-                else {owner.setHp(enemy.field.get(target).getStat()-attack);}
+                else {owner.setHp(opponent.getStat()-attack);}
             }
             else {
-                if(enemy.field.get(target).attackPos){
-                    enemy.field.get(target).deathEffect(owner, enemy, target);
-                    enemy.grave.add(enemy.field.get(target));
-                    enemy.field.remove(target);
-                    owner.field.get(position).deathEffect(owner, enemy, position);
+                if(opponent.attackPos){
+                    opponent.deathEffect(owner, enemy, target);
+                    enemy.grave.add(opponent);
+                    enemy.field.removeMon(target);
+                    owner.field.getMon(position).deathEffect(owner, enemy, position);
                     owner.grave.add(this);
-                    owner.field.remove(position);
+                    owner.field.removeMon(position);
                 }
-                else{enemy.field.get(target).flipped = true;}
+                else{opponent.flipped = true;}
             }
         }
     }
