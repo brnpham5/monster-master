@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cards.yugiSpells;
+package cards.YugiSpells;
 
 import game.playerPackage.player;
 import game.playerPackage.YugiPlayer;
