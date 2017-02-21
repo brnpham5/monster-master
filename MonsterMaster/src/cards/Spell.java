@@ -1,7 +1,7 @@
 package cards;
 
 import cards.Card;
-import game.player;
+import game.playerPackage.player;
 
 public class Spell implements Card {
 	

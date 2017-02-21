@@ -7,7 +7,7 @@ package game.strategy;
 
 import cards.Monster;
 import game.move;
-import game.player;
+import game.playerPackage.player;
 import java.util.ArrayList;
 
 /**
@@ -30,7 +30,7 @@ public class FirstBattle implements move{
 			int pos;
 			
 			//Position of target is calculated here.
-			pos = attack(enemy.field);
+			pos = attack(enemy.field.getList());
 			
 			//If the attacking monster's summoning cooldown is less than 0.
 			//Go through attack sequence. If not the monster does not attack

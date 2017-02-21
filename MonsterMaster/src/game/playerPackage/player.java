@@ -1,17 +1,18 @@
-package game;
+package game.playerPackage;
 import game.strategy.Dumb;
 import game.strategy.Offensive;
 import cards.Spells;
 import cards.Monsters;
 import cards.Monster;
 import cards.*;
+import game.move;
 
 import java.util.ArrayList;
 
 //This class will represent the players of the game.
 //The class holds their deck, hand, graveyard, and active monsters.
 //The class also holds how much life they have and the flag for when they lose.
-public class player {
+public class player implements playerInterface{
 	
 	//int value that represents how much life the player has 
 	//in game. When this goes to 0 or below then player loses.
@@ -20,24 +21,22 @@ public class player {
 	
 	//Variable that holds all the cards in the players deck.
 	//Will be used to add cards to hand or summon skeletons through spell.
-	public deck Deck;
+        public playerDeck Deck = new playerDeck();
 	
 	
 	//Variable that holds all cards in player's hand
 	//These cards are playable by the player.
-	public ArrayList <Card> hand = new ArrayList <Card>();
+        public playerHand hand = new playerHand();
 	
 	
 	//Variable that holds all used up spells or killed monsters.
 	//These cards will remain here unless beckon or necromancy spell is used.
-	public ArrayList <Card> grave = new ArrayList <Card>();
-	
+	public playerGrave grave = new playerGrave();
 	
 	//Variable that holds the monsters that protects the player.
 	//These monsters can attack the enemy if the attacking monster's
 	//cooldown is 0.
-	public ArrayList <Monster> field = new ArrayList <Monster>();
-	
+	public playerField field = new playerField();
 	
 	//Variable is flag that tells if the player has lost or not.
 	//Will only switch to true if the player can't draw or lost
@@ -70,6 +69,15 @@ public class player {
         //The flag is turned false at the end of the player's turn.
 	public boolean summoned = false;
 	
+        public player(){
+            defaultDeck();
+            id = "Default";
+            for(int loop = 0;loop < 5;loop++){
+		getCard();
+            }
+            
+        }
+        
 	//creates premade deck then sends it to deck class to shuffle 
 	//premade deck is then stored into Deck variable.
 	//Constructor also sets the strategy the player will use.
@@ -95,7 +103,7 @@ public class player {
         //The ArrayList is the premade deck passed.
         //Draws is the numbers of draws the player does to get their hand.
         public player(Dumb strat,Offensive plan,String name,ArrayList<Card> Cards,int draws){
-            Deck = new deck(Cards);
+            Deck = new playerDeck(Cards);
             id = name;
             planA = strat;
             planB = plan;
@@ -136,7 +144,7 @@ public class player {
 		Cards.add(powers.curse);
 		Cards.add(powers.curse);
 		Cards.add(powers.curse);
-		Deck = new deck(Cards);
+		Deck = new playerDeck(Cards);
         }
         
         //Counts the up number of certain cards in the hand.
@@ -328,4 +336,5 @@ public class player {
 		}while(!moves.isEmpty());
 		refresh();
 	}
+        
 }

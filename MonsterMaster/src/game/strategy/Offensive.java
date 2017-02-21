@@ -1,7 +1,8 @@
 package game.strategy;
 
+import game.Strategy;
 import game.move;
-import game.player;
+import game.playerPackage.player;
 import java.util.ArrayList;
 
 

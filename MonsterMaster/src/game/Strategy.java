@@ -1,9 +1,9 @@
-package game.strategy;
+package game;
 
 import java.util.ArrayList;
 import cards.Monster;
 import game.move;
-import game.player;
+import game.playerPackage.player;
 
 //This is the strategy interface.
 //The classes that implement the strategy class.

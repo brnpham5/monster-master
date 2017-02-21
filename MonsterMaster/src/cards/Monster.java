@@ -1,7 +1,7 @@
 package cards;
 
 import cards.Card;
-import game.player;
+import game.playerPackage.player;
 import java.util.concurrent.ThreadLocalRandom;
 
 //Below are the code needed for a monster card from

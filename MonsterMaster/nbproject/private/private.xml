@@ -3,26 +3,43 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/spells/Doom.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/Duel.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/Spells.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/testcases/tester_restoreSpells.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/player.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/Monsters.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/playerPackage/yugiDeck.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/yugiMonsters/RedEyesBD.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/yugiMonsters/MrBones.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/yugiMonsters/Mon.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/playerPackage/player.java</file>
             <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/Card.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/FireBuff.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/playerPackage/YugiPlayer.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/yugiSpells/Hinotama.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/yugiMonsters/DrakeValleyMaster.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/HealNDmgSpell.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/yugiMonsters/Vestri.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/yugiMonsters/Greeble.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/playerPackage/YugiPlayerField.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/OffensiveBattle.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/test/cards/FireSwordTest.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/playerPackage/yugiField.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/yugiSpells/Magic.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/playerPackage/yugiGrave.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/Spell.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/Strategy.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/spells/Doom.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/Monsters.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/yugiMonsters/BlueEyesWD.java</file>
             <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/FirstBattle.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/Dumb.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/CurseDebuff.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/Game.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/DefenseSummon.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/deck.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/DumbYugi.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/Factory.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/nbproject/build-impl.xml</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/SwordBuff.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/YugiStrategy.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/yugiMonsters/CyberFalcon.java</file>
             <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/tester.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/Strategy.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/yugiMonsters/ProtoGolem.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/yugiMonsters/DarkMagician.java</file>
             <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/move.java</file>
             <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/Monster.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/strategy/IceBuff.java</file>
-            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/Spell.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/game/playerPackage/yugiHand.java</file>
+            <file>file:/Users/brnpham/Desktop/monster-master/MonsterMaster/src/cards/spells/Sacrifice.java</file>
         </group>
     </open-files>
 </project-private>

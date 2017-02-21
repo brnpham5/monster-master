@@ -1,10 +1,11 @@
 package game.strategy;
 
+import game.Strategy;
 import java.util.ArrayList;
 
 import cards.Monster;
 import game.move;
-import game.player;
+import game.playerPackage.player;
 
 //The dumb strategy will consist of summoning the 
 //first monster in the player's hand. The player

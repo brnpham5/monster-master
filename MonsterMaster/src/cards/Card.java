@@ -1,6 +1,6 @@
 package cards;
 
-import game.player;
+import game.playerPackage.player;
 
 //Card interface only used by all cards in the game.
 public interface Card {
