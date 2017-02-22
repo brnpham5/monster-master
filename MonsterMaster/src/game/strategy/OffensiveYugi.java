@@ -20,7 +20,11 @@ public class OffensiveYugi extends YugiStrategy{
         boolean [][] usage = user.spellUse(count, enemy); 
         
         if(count[0] > 0 && !user.summoned){
-            moves.add(new AttackSummon());
+            int enemyMon = enemy.field.findStrongest();
+            if(enemyMon > user.findStrongest())
+                moves.add(new DefenseSummon());
+            else
+                moves.add(new AttackSummon());
         }
         if(usage[0][0] == true && usage[0][1] == true)
            moves.add(new BSwordBuff());

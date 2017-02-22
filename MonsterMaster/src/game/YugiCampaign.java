@@ -5,6 +5,7 @@
  */
 package game;
 
+import game.playerPackage.HumanYugi;
 import game.playerPackage.YugiPlayer;
 import game.strategy.DumbYugi;
 import game.strategy.OffensiveYugi;
@@ -15,7 +16,7 @@ import java.util.Scanner;
  * @author Michael
  */
 public class YugiCampaign {
-    private YugiPlayer human;
+    private HumanYugi human;
     
     private YugiPlayer cpu;
     
@@ -38,9 +39,9 @@ public class YugiCampaign {
                 System.out.println("-------------");
                 choice = input.nextInt();
             }   if (choice == 1) {
-                human = new YugiPlayer(new OffensiveYugi(),"Human");
+                human = new HumanYugi("Human");
                 cpu = new YugiPlayer(new DumbYugi(),"Computer");
-                newGame();
+                newGame(input);
             }
             //
         }
@@ -48,42 +49,40 @@ public class YugiCampaign {
     
     
     
-    public void newGame() throws InterruptedException{
-        int result = battle();
+    public void newGame(Scanner input) throws InterruptedException{
+        int result = battle(input);
         if(result == 0){
             System.out.println("Continue?");
-            try (Scanner input = new Scanner(System.in)) {
                 String choice = "";
                 while(!choice.equalsIgnoreCase("y") && !choice.equalsIgnoreCase("n")){
                 System.out.println("Enter y to retry or n to quit\n");
                 choice = input.next();    
                 }
                 if(choice.equalsIgnoreCase("y")){
-                    human = new YugiPlayer(new OffensiveYugi(),"Human");
+                    human = new HumanYugi("Human");
                     cpu = new YugiPlayer(new DumbYugi(),"Computer");
-                    newGame();
+                    newGame(input);
                 }
                 else{
                     //Load game here
                 }
-            }
         }
         else{
-            human = new YugiPlayer(new OffensiveYugi(),"Human");
+            human = new HumanYugi("Human");
             cpu = new YugiPlayer(new DumbYugi(),"Computer");
-            battle();
+            battle(input);
         }
             
     }
     
-    public int battle() throws InterruptedException{
+    public int battle(Scanner input) throws InterruptedException{
         int counter = 1;
         while(!human.getLose() && !cpu.getLose()){
             System.out.println("Turn "+ counter);
             System.out.println("Human Hp: \t"+ human.getHp() +
 		               "\t Computer Hp:\t"+ cpu.getHp());
             System.out.println(human.id);
-            human.turn(cpu,counter);
+            human.turn(cpu,counter,input);
             Thread.sleep(1000);
             System.out.println("\n"+cpu.id);
             if(human.getLose() || cpu.getLose()){break;}

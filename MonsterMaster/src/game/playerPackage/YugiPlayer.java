@@ -117,27 +117,41 @@ public class YugiPlayer implements playerInterface{
     
     @Override
     public int[] countHand() {
-        int [] contents = new int[13];
+        int [] contents = new int[14];
             for(int loop = 0; loop < hand.size(); loop++){
                 String spellName = hand.get(loop).getName();
                 switch (spellName){
-                    case "Berserker's Sword": contents[1]++;
+                    case "Berserker's Sword": 
+                        contents[1]++;
+                        contents[13]++;
                         break;
-                    case "Tower Shield": contents[2]++;
+                    case "Tower Shield": 
+                        contents[2]++;
+                        contents[13]++;
                         break;
-                    case "Soul Shield": contents[3]++;
+                    case "Soul Shield": 
+                        contents[3]++;
+                        contents[13]++;
                         break;
-                    case "Salamandra": contents[4]++;
+                    case "Salamandra": 
+                        contents[4]++;
+                        contents[13]++;
                         break;
-                    case "Nephthy's Curse": contents[5]++;
+                    case "Nephthy's Curse": 
+                        contents[5]++;
+                        contents[13]++;
                         break;
                     case "heal": contents[6]++;//Need to change
                         break;
                     case "restore": contents[6]++;//Need to change
                         break;
-                    case "Hinotama": contents[7]++;
+                    case "Hinotama": 
+                        contents[7]++;
+                        contents[13]++;
                         break;
-                    case "lightning": contents[7]++;//Need to change
+                    case "Raimei": 
+                        contents[7]++;
+                        contents[13]++;
                         break;
                     case "sacrifice": contents[8]++;//Need to change
                         break;
@@ -244,6 +258,20 @@ public class YugiPlayer implements playerInterface{
         return false;
     }
 
+    
+    
+    public int findStrongest(){
+        int highest = 0;
+        Mon card;
+        for(int loop = 0; loop < hand.size();loop++){
+            if(hand.get(loop) instanceof Mon){
+                card = (Mon)hand.get(loop);
+                if(card.getAtk() > 0)
+                    highest = card.getAtk();
+            }
+        }
+        return highest;
+    }
 
     
     public void turn(YugiPlayer enemy,int turn) {
@@ -264,20 +292,20 @@ public class YugiPlayer implements playerInterface{
 
     
     //When player turn ends, summon flag is set to false and monster's
-        //attack flag is set to false. Also every monster placed value is reduced
-        //by 1.
-	private void endphase(){
-		summoned = false;
-		for(int loop = 0; loop < field.monSize();loop++){
-			if(field.getMon(loop).attacked){
-				field.getMon(loop).attacked = false;
-			}
-		}
-                while(hand.getSize() > 7){
-                    int position = ThreadLocalRandom.current().nextInt(0, hand.getSize());
-                    hand.remove(position);
-                }
+    //attack flag is set to false. Also every monster placed value is reduced
+    //by 1.
+    private void endphase(){
+	summoned = false;
+	for(int loop = 0; loop < field.monSize();loop++){
+            if(field.getMon(loop).attacked){
+		field.getMon(loop).attacked = false;
+            }
 	}
+        while(hand.getSize() > 7){
+            int position = ThreadLocalRandom.current().nextInt(0, hand.getSize());
+            hand.remove(position);
+        }
+    }
 
     @Override
     public boolean getLose() {

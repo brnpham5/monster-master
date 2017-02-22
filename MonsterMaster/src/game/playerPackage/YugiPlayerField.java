@@ -243,6 +243,22 @@ public class YugiPlayerField{
     }
     
     
+    /**
+     * This function looks through the opposing player's field and check for 
+     * monster in attack position with the highest attack.
+     * @return The highest attack value of monster in attack position.
+     */
+    public int findStrongest(){
+        int highest =  0;
+        for(Mon card : monsters){
+            if(card.flipped && card.attackPos){
+                if(card.getStat() > highest)
+                    highest =  card.getStat();
+            }
+        }
+        return highest;
+    }
+    
     
     /**
      * Gives size of monster field

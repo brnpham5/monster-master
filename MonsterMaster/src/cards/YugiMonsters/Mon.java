@@ -139,7 +139,7 @@ public class Mon extends Monster implements Card{
             if(attack > opponent.getStat()){
                 if(opponent.attackPos){
                     System.out.println(name +" killed "+ opponent.name+
-                                       " and deals "+ (attack - opponent.getStat()) + " damage");
+                                       " and deals "+ (attack - opponent.getStat()) + " damage.");
                     enemy.setHp(attack - opponent.getStat());
                     opponent.deathEffect(enemy, owner, target);
                     enemy.grave.add(opponent);
@@ -237,6 +237,17 @@ public class Mon extends Monster implements Card{
             attackPos = false;
             flipped = false;
         }
+    }
+    
+    
+    public void switchPos(){
+        if(!attackPos){
+            attackPos = true;
+            if(!flipped)
+                flipped = true;
+        }
+        else 
+            attackPos = false;
     }
     
     
