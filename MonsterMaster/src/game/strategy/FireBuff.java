@@ -29,7 +29,9 @@ public class FireBuff implements move{
             }
 	}
 	if(pos != -1){
-            user.hand.getCard(new Salamandra()).effect(user, null, pos, 0);
+            Salamandra card = new Salamandra();
+            user.hand.remove(card);
+            card.effect(user, null, pos, 0);
 	}
     }
     

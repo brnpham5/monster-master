@@ -29,7 +29,7 @@ public class BSwordBuff implements move{
                 
 		if(pos != -1){
                     BerserkerSword card = new BerserkerSword();
-                    user.hand.list.remove(new BerserkerSword());
+                    user.hand.remove(new BerserkerSword());
                     card.effect(user, null, pos, 0);
 		}
 	}

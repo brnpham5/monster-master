@@ -37,7 +37,7 @@ public class IceBuff implements move{
                 
 	if(pos != -1){
             SoulShield card = new SoulShield();
-            user.hand.list.remove(card);
+            user.hand.remove(card);
             card.effect(user, null, pos, 0);
 	}
 	}

@@ -68,7 +68,7 @@ public class YugiPlayerField{
             return temp;
             
         } else {
-            System.out.println ("Card not found.");
+            System.out.println (card.getName()+" not found on field.");
             return null;
         }
     }
@@ -87,7 +87,7 @@ public class YugiPlayerField{
             return temp;
             
         } else {
-            System.out.println (card.getName()+" not found.");
+            System.out.println (card.getName()+" not found on field.");
             return null;
         }
     }
@@ -204,7 +204,6 @@ public class YugiPlayerField{
      * @return the card that was at the selected position
      */
     public Magic getMagic(int target){
-        System.out.println(target + " "+magics.size());
         if(target < magics.size() && target > -1)
             return magics.get(target);
         else

@@ -100,7 +100,9 @@ public class YugiPlayer implements playerInterface{
         Cards.add(new MasterAlien());
         Cards.add(new MrBones());
         Cards.add(new MrBones());
-        Cards.add(new MrBones());
+        Cards.add(new ProtoGolem());
+        Cards.add(new DarkGray());
+        Cards.add(new FaithBird());
         Cards.add(new Fireyarou());
         Cards.add(new Fireyarou());
         Cards.add(new Hinotama());
@@ -247,16 +249,16 @@ public class YugiPlayer implements playerInterface{
     public void turn(YugiPlayer enemy,int turn) {
         plan.drawPhase(this);
         if(lose){return;}
-        System.out.println("Hand");
-        hand.print();
-        System.out.println("Field");
-        field.print();
         for(move action:plan.mainPhase(this, enemy)){
             action.executeY(this, enemy);
         }
         if(turn != 1)
             plan.battlePhase(this, enemy);
         endphase();
+        System.out.println("\n\n=================\nHand\n=================");
+        hand.print();
+        System.out.println("\n=================\nField\n=================");
+        field.print();
     }
 
 

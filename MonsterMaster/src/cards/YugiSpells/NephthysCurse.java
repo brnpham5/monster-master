@@ -23,8 +23,8 @@ public class NephthysCurse extends Magic{
     @Override
     public void effect(YugiPlayer owner, YugiPlayer enemy, int target, int position){
             Mon monster = enemy.field.getMon(target);
-            monster.atkMod += monster.getLvl() * 200;
-            monster.defMod += monster.getLvl() * 200;
+            monster.atkMod -= monster.getLvl() * 200;
+            monster.defMod -= monster.getLvl() * 200;
             owner.grave.add(this);
             System.out.println(owner.id + " used Nephthy's Curse on "+ monster.getName() + ".");
             

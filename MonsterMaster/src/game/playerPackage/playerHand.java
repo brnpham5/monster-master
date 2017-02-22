@@ -30,7 +30,7 @@ public class playerHand {
             return temp;
             
         } else {
-            System.out.println ("Card not found.");
+            System.out.println (card.getName()+" not found in hand.");
             return null;
         }
     }

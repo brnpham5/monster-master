@@ -141,13 +141,13 @@ public class Mon extends Monster implements Card{
                     System.out.println(name +" killed "+ opponent.name+
                                        " and deals "+ (attack - opponent.getStat()) + " damage");
                     enemy.setHp(attack - opponent.getStat());
-                    opponent.deathEffect(owner, enemy, target);
+                    opponent.deathEffect(enemy, owner, target);
                     enemy.grave.add(opponent);
                     enemy.field.removeMon(target);
                 }
                 else {
                     System.out.println(name +" killed "+ opponent.name);
-                    opponent.deathEffect(owner, enemy, position);
+                    opponent.deathEffect(enemy, owner, position);
                     enemy.grave.add(opponent);
                     enemy.field.removeMon(target);
                 }
@@ -170,7 +170,7 @@ public class Mon extends Monster implements Card{
             else {
                 if(opponent.attackPos){
                     System.out.println(name+" and "+ opponent.name+" died." );
-                    opponent.deathEffect(owner, enemy, target);
+                    opponent.deathEffect(enemy, owner, target);
                     enemy.grave.add(opponent);
                     enemy.field.removeMon(target);
                     owner.field.getMon(position).deathEffect(owner, enemy, position);
@@ -204,7 +204,7 @@ public class Mon extends Monster implements Card{
         for(int loop = 0; loop < 5;loop++){
             if(equipped[loop]){
                 owner.field.print();
-                Magic spell = owner.field.getMagic((loop - offset));
+                Magic spell = owner.field.getMagic(loop - offset);
                 spell.removedEffect(owner, enemy, position, loop-offset);
                 offset++;
             }

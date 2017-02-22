@@ -39,7 +39,7 @@ public class FirstSummon implements move{
                 state = true;
             monster.summon(user, state);
             user.summoned = true;
-            System.out.println(user.id +" summoned "+ monster.getName());
+            System.out.println(user.id +" summoned "+ monster.getName() +"");
 	}
 	else{System.out.println(user.id +" does not summon.\n");}
     }

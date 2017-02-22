@@ -32,7 +32,7 @@ public class NCurse implements move{
                 
 	if(pos != -1){
             NephthysCurse card = new NephthysCurse();
-            user.hand.getCard(new NephthysCurse());
+            user.hand.remove(card);
             card.effect(user,enemy,pos,0);
         }
     }

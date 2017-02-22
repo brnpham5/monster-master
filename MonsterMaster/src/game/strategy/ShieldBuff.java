@@ -33,7 +33,7 @@ public class ShieldBuff implements move{
 	}
 	if(pos != -1){
             TowerShield card = new TowerShield();
-            user.hand.getCard(new TowerShield());
+            user.hand.remove(card);
             card.effect(user, null, pos, 0);
 	}
     }

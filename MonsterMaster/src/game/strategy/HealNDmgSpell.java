@@ -24,7 +24,7 @@ public class HealNDmgSpell implements move{
 
     @Override
     public void executeY(YugiPlayer user, YugiPlayer enemy) {
-        Magic card = new Hinotama();
+        Hinotama card = new Hinotama();
         if(user.hand.getCard(card) != null)
             card.effect(user, enemy, 0, 0);
         //Rest of the heal/direct damage spells go here.
