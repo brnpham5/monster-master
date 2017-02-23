@@ -58,6 +58,22 @@ public class YugiPlayer extends player{
         plan = strat;
     }
     
+    //Constructor that you can use for testing.
+    //Set the strategy for the player with Dumb strat or Offensive plan.
+        //Only one strategy should be have a value and the other is null.
+        //If both parameters have values, strat is used in move planning.
+        //String name is name of player. Used for showing game details.
+        //The ArrayList is the premade deck passed.
+        //Draws is the numbers of draws the player does to get their hand.
+        public YugiPlayer(YugiStrategy strat, String name,ArrayList<Card> Cards,int draws){
+            Deck = new playerDeck(Cards);
+            id = name;
+            plan = strat;
+            for(int loop = 0;loop < draws;loop++){
+		getCard();
+            }
+        }
+    
     @Override
     public void defaultDeck() {
         ArrayList<Card> Cards = new ArrayList();
