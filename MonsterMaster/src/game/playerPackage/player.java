@@ -69,6 +69,15 @@ public class player implements playerInterface{
         //The flag is turned false at the end of the player's turn.
 	public boolean summoned = false;
 	
+        public player(){
+            defaultDeck();
+            id = "Default";
+            for(int loop = 0;loop < 5;loop++){
+		getCard();
+            }
+            
+        }
+        
 	//creates premade deck then sends it to deck class to shuffle 
 	//premade deck is then stored into Deck variable.
 	//Constructor also sets the strategy the player will use.

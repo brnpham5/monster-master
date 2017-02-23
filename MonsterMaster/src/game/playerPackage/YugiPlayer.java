@@ -57,6 +57,7 @@ public class YugiPlayer implements playerInterface{
     YugiStrategy plan;
 
     
+
     //Variable is flag that tells if the player has lost or not.
 	//Will only switch to true if the player can't draw or lost
 	//all of their health points.
@@ -79,6 +80,14 @@ public class YugiPlayer implements playerInterface{
         
 
        //
+
+    public YugiPlayer(){
+        super(null,null,"Default");
+        plan = null;
+    }
+    
+    //
+
     public YugiPlayer(YugiStrategy strat,String name){
         plan = strat;
         id  = name;
@@ -88,6 +97,23 @@ public class YugiPlayer implements playerInterface{
         }
     }
     
+
+    //Constructor that you can use for testing.
+    //Set the strategy for the player with Dumb strat or Offensive plan.
+        //Only one strategy should be have a value and the other is null.
+        //If both parameters have values, strat is used in move planning.
+        //String name is name of player. Used for showing game details.
+        //The ArrayList is the premade deck passed.
+        //Draws is the numbers of draws the player does to get their hand.
+        public YugiPlayer(YugiStrategy strat, String name,ArrayList<Card> Cards,int draws){
+            Deck = new playerDeck(Cards);
+            id = name;
+            plan = strat;
+            for(int loop = 0;loop < draws;loop++){
+		getCard();
+            }
+        }
+
     
     @Override
     public void defaultDeck() {

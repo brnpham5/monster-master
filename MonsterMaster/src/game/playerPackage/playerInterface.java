@@ -21,5 +21,14 @@ public interface playerInterface {
     public boolean getLose();
     public void setStrategy(Strategy strat);
     
+    //public attack(int position, int target);
+    //public bool canAttack ();
+    //public int countHand ();
+    //public bool draw();
+    //public void discard (int card);
+    //public void endTurn();
+    //public void playCard(int position);
+    //public void printHand();
+    
     
 }
