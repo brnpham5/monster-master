@@ -67,6 +67,20 @@ public class YugiCampaign {
                     //Load game here
                 }
         }
+        else if(result == 1){
+            System.out.println("Continue?");
+                String choice = "";
+                while(!choice.equalsIgnoreCase("y") && !choice.equalsIgnoreCase("n")){
+                System.out.println("Enter y to continue or n to quit\n");
+                choice = input.next();    
+                }
+                if(choice.equalsIgnoreCase("y")){
+                    human = new HumanYugi("Human");
+                    cpu = new opponentsFactory().valentine1();
+                    newGame(input);
+                }
+            
+        }
         else{
             human = new HumanYugi("Human");
             cpu = new YugiPlayer(new DumbYugi(),"Computer");

@@ -41,7 +41,24 @@ public class opponentsFactory {
         return new YugiPlayer(offense, "weevil1", deck, 5);
     }
     
-    
+    public YugiPlayer valentine1(){
+        //Populate Deck
+        deck.add(new Greeble());
+        deck.add(new DarkElf());
+        deck.add(new Fireyarou());
+        deck.add(new FaithBird());
+        deck.add(new CyberFalcon());
+        deck.add(new DarkMagician());
+        deck.add(new LuminousSoldier());
+        deck.add(new Raimei());
+        deck.add(new SoulShield());
+        deck.add(new MonsterKnight());
+        
+
+        //Return player
+        //YugiStrategy strat, String name,ArrayList<Card> Cards,int draws
+        return new YugiPlayer(offense, "Valentine", deck, 5);
+    }
     
     
 }
