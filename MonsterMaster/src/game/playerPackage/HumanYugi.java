@@ -126,11 +126,11 @@ public class HumanYugi extends YugiPlayer{
                 do{
                 System.out.println("Choose postion of monster to summon from your hand.");
                 choice = input.nextInt();
-                if(choice >= 0 && choice < hand.size()){
+                if(choice >= 1 && choice <= hand.size()){
                     
-                if(hand.get(choice) instanceof Mon){
+                if(hand.get(choice-1) instanceof Mon){
                     summoned = true;
-                    int pos = choice;
+                    int pos = choice-1;
                     do{
                     System.out.println("Select postion of summoned monster.");
                     System.out.println("Select 0 to summon monster in attack position.");
@@ -168,10 +168,10 @@ public class HumanYugi extends YugiPlayer{
             System.out.println("Choose a spell card to use from your hand.");
             System.out.println("Select the card position.");
             choice = input.nextInt();
-            if(choice >= 0 && choice < hand.size()){
+            if(choice >= 1 && choice <= hand.size()){
                 int pos = choice;
-                if(hand.get(choice) instanceof Magic){
-                    Magic card = (Magic)hand.get(choice);
+                if(hand.get(choice-1) instanceof Magic){
+                    Magic card = (Magic)hand.get(choice-1);
                     if(card.getCategory() == 2){
                         if(card.getName().equals("Salamandra") && !field.findElement(2)){
                             System.out.println("Card cannot be used without fire element monster.");
@@ -180,8 +180,9 @@ public class HumanYugi extends YugiPlayer{
                         System.out.println("Select position of monster to equip from your field.");
                         choice = input.nextInt();
                         if(choice >= 1 && choice <= field.monSize()){
+                            pos = choice;
                             if(card.getName().equals("Salamandra")){
-                                if(field.getMon(choice).getEle() == 2){
+                                if(field.getMon(choice-1).getEle() == 2){
                                     card.effect(this, enemy, choice-1, pos);
                                     hand.remove(pos);
                                     choice = -1;
@@ -205,7 +206,7 @@ public class HumanYugi extends YugiPlayer{
                                     System.out.println("Select position of monster from enemy field.");
                                     choice = input.nextInt();
                                     if(choice >= 1 && choice <= enemy.field.monSize()){
-                                          hand.get(choice).effect(this, enemy, choice-1, pos);
+                                          hand.get(choice-1).effect(this, enemy, choice-1, pos);
                                     }
                                     else if(choice == -1)
                                         System.out.println("Spell Canceled");      
