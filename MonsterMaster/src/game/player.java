@@ -17,6 +17,10 @@ public class player {
 	//in game. When this goes to 0 or below then player loses.
 	private int health = 20;
 	
+        private int win;
+        private int draw;
+        private int loss;
+        
 	
 	//Variable that holds all the cards in the players deck.
 	//Will be used to add cards to hand or summon skeletons through spell.
@@ -78,6 +82,9 @@ public class player {
 	public player(Dumb strat,Offensive plan,String name){
 		
 		defaultDeck();
+                win =0;
+                draw =0;
+                loss =0;
 		id = name;
 		planA = strat;
 		planB = plan;
@@ -292,6 +299,39 @@ public class player {
 	}
 	
 	
+    
+    public void addwin(){
+       win = win+1; 
+    }
+    public void adddraw(){
+       draw = draw+1; 
+    }    
+    public void addloss(){
+        loss = loss+1;
+    }  
+    public void setwin(int winvalue){
+        win = winvalue;
+    }  
+    public void setdraw(int drawvalue){
+        draw = drawvalue;
+    }   
+    public void setloss(int lossvalue){
+        loss = lossvalue;
+    }  
+    public int getwin(){
+        return win;
+    }  
+    public int getdraw(){
+        return draw;
+    }  
+    public int getloss(){
+        return loss;
+    } 
+        
+        
+        
+        
+        
 	//This is how the player interacts when on their turn happens.
 	//Strategy changes which actions the player does.
 	//Main flow of the function is draw, summon, use spell, and attack.
