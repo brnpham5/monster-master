@@ -6,7 +6,11 @@
 package game.strategy;
 
 import game.move;
+
+import game.playerPackage.YugiPlayer;
+
 import game.playerPackage.player;
+
 import java.util.ArrayList;
 
 /**
@@ -16,8 +20,18 @@ import java.util.ArrayList;
 public class DumbYugi extends YugiStrategy{ 
     
     
-    public ArrayList<move> pickMove(player user, player enemy) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<move> pickMove(YugiPlayer user, YugiPlayer enemy) {
+        ArrayList <move> moves = new ArrayList();
+        int [] count = user.countHand();
+        if(count[0] > 0)
+            moves.add(new FirstSummon());
+        return moves;
     }
     
+    
+    @Override
+    public void battlePhase(YugiPlayer user, YugiPlayer enemy){
+        YugiAttack battle = new YugiAttack();
+        battle.execute(user, enemy);
+    }
 }

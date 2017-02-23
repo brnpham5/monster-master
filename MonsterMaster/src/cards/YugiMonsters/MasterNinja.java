@@ -31,15 +31,21 @@ public class MasterNinja extends Mon{
     public void attack(YugiPlayer owner, YugiPlayer enemy, int target, int position) {
         Mon opponent = enemy.field.getMon(target);
         if(target == -1){enemy.setHp(getAtk());}
-        else if(!opponent.flipped){effect(owner,enemy,target,position);}
+        else if(!opponent.flipped){
+            System.out.println(name +" killed "+ opponent.getName());
+            effect(owner,enemy,target,position);}
         else{
+            System.out.println(name +" attacks "+ enemy.id);
             if(attack > enemy.field.getMon(target).getStat()){
-                if(opponent.attackPos){
+                if(!opponent.attackPos){
+                    System.out.println(name +" killed "+ opponent.getName());
                     opponent.deathEffect(owner, enemy, position);
                     enemy.grave.add(opponent);
                     enemy.field.removeMon(target);
                 }
                 else {
+                    System.out.println(name +" killed "+ opponent.getName()+
+                                       " and deals "+ (attack - opponent.getStat()) + " damage");
                     enemy.setHp(attack - opponent.getStat());
                     opponent.deathEffect(owner, enemy, target);
                     enemy.grave.add(opponent);
@@ -48,15 +54,20 @@ public class MasterNinja extends Mon{
             }
             else if(attack < opponent.getStat()){
                     if(opponent.attackPos){
+                        System.out.println(name +" is killed and "+ owner.id +
+                                           " takes "+ (opponent.getStat()-attack) + " damage.");
                         owner.setHp(opponent.getStat()-attack);
                         owner.field.getMon(position).deathEffect(owner, enemy, position);
                         owner.grave.add(this);
                         owner.field.removeMon(position);
                     }
-                else {owner.setHp(opponent.getStat()-attack);}
+                else {
+                        System.out.println(owner.id +" takes "+ (opponent.getStat()-attack) +" damage.");
+                        owner.setHp(opponent.getStat()-attack);}
             }
             else {
                 if(opponent.attackPos){
+                    System.out.println(name+" and "+ opponent.getName()+" died." );
                     opponent.deathEffect(owner, enemy, target);
                     enemy.grave.add(opponent);
                     enemy.field.removeMon(target);
@@ -64,7 +75,6 @@ public class MasterNinja extends Mon{
                     owner.grave.add(this);
                     owner.field.removeMon(position);
                 }
-                else{opponent.flipped = true;}
             }
         }
     }

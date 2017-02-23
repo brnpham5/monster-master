@@ -7,6 +7,7 @@ package game.strategy;
 
 import cards.Monster;
 import game.move;
+import game.playerPackage.YugiPlayer;
 import game.playerPackage.player;
 import java.util.ArrayList;
 
@@ -52,4 +53,9 @@ public class FirstBattle implements move{
 		if(field.size() > 0){return 0;}
 		else {return -1;}
 	}
+
+    @Override
+    public void executeY(YugiPlayer user, YugiPlayer enemy) {
+    //nothing
+    }
 }

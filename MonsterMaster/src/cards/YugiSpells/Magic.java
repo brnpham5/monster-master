@@ -40,6 +40,7 @@ public class Magic extends Spell{
     }
     
     
+    public int getCategory(){ return category;}
     
     /**
      * The effect of the magic card.

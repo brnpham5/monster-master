@@ -12,18 +12,18 @@ public class Spells {
         //Shields increases defense. Ice = +4, Regular = +2
         //Only 1 of each buff per monster. 
         //Ex. Monster can have 1 of each but not 2 regular swords.
-	public FireSword fireSword = new FireSword();
-	public IceShield iceShield = new IceShield();
-	public Sword sword = new Sword();
-	public Shield shield = new Shield();
+	public FireSword fireSword(){return new FireSword();}
+	public IceShield iceShield(){return new IceShield();}
+	public Sword sword(){ return new Sword();}
+	public Shield shield(){return new Shield();}
         
         //Monster stat debuffs
         //Curse decreases monster's attack and defense by 1.
         //Weaken decreases monster's attack by 3.
         //Vulnerable decreases monster's defense by 3.
-        public Curse curse = new Curse();
-	public Spell weaken = new Spell("weaken");
-	public Spell vulnerable = new Spell("vulnerable");
+        public Curse curse(){return new Curse();}
+	public Spell weaken(){return new Spell("weaken");}
+	public Spell vulnerable(){return new Spell("vulnerable");}
         
         
         //Healing spells.
@@ -31,9 +31,9 @@ public class Spells {
         //Heal restores monster's health by 2.
         //Restore heals player's health by 2.
         //Sacrifice kills 1 monster to restores player's health by 5.
-	public Heal heal = new Heal();
-        public Restore restore = new Restore();
-        public Sacrifice sacrifice = new Sacrifice();
+	public Heal heal(){return new Heal();}
+        public Restore restore(){return new Restore();}
+        public Sacrifice sacrifice(){return new Sacrifice();}
         
         //Removing buffs or ailment spells.
         //Cleanse removes any ailments on user's monster.
@@ -43,14 +43,14 @@ public class Spells {
         //Ex. Swords and Shields
 	public Spell cleanse = new Spell("cleanse");
 	public Spell antidote = new Spell("antidote");
-        public Strip strip = new Strip();
+        public Strip strip(){return new Strip();}
 	
 	//Damage spells
         //Fireball inflicts 3 damage to an enemy's monster
         //Lightning inflicts 2 damage to an enemy's monster
         //Flood deals 1 damage to all monsters on both fields.
-	public Fireball fireball = new Fireball();
-	public Lightning lightning = new Lightning();
+	public Fireball fireball(){return new Fireball();}
+	public Lightning lightning(){return new Lightning();}
         public Spell flood = new Spell("flood");
         
         //Ailment spells
@@ -74,16 +74,16 @@ public class Spells {
         //Beckon does same thing as reborn except gets the monster from the user's deck.
         //Gift gets user to draw 2 cards from their deck.
 	public Spell steal = new Spell("steal");
-	public Forget forget = new Forget();
+	public Forget forget(){return new Forget();}
         public Spell reborn = new Spell("reborn");
 	public Spell beckon = new Spell("beckon");
-	public Gift gift = new Gift();
+	public Gift gift(){return new Gift();}
         
         //Killing spells.
         //Black Hole kills all monsters on both fields.
         //Doom kills enemy's monster with the lowest attack.
 	public Spell blackHole = new Spell("black hole");
-	public Doom doom = new Doom();
+	public Doom doom(){return new Doom();}
         
         //This spell allows one of the user's monster to attack 1 more time.
         public Spell charge = new Spell("charge!");

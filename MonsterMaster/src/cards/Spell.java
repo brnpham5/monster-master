@@ -1,6 +1,7 @@
 package cards;
 
 import cards.Card;
+import game.playerPackage.YugiPlayer;
 import game.playerPackage.player;
 
 public class Spell implements Card {
@@ -32,8 +33,15 @@ public class Spell implements Card {
         
         //This function is a place holder that does nothing.
         //Subclasses of spell will override this to fit their special needs.
+        @Override
         public void effect(player owner, player enemy, int target, int position){
+            System.out.println("This shouldn't do anything.");
             //This function does nothing in Spell parent class.
         }
+
+    @Override
+    public void effect(YugiPlayer owner, YugiPlayer enemy, int target, int position) {
+        //does nothing
+    }
 
 }

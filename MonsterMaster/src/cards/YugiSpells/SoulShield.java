@@ -28,14 +28,14 @@ public class SoulShield extends Magic{
      * @param target Position of the monster who the spell will affect.
      * @param position Position of the spell card in the owner's hand.
      */
+    @Override
     public void effect(YugiPlayer owner, YugiPlayer enemy, int target, int position){
         Mon monster = owner.field.getMon(target);
         monster.defMod += 600;
         owner.field.addMagic(this);
-        owner.hand.remove(position);
         place = owner.field.magicSize()-1;
         monster.equipped[place] = true;
-        System.out.println(owner.id +" used Salamandra on "+monster.getName()+".");
+        System.out.println(owner.id +" used Soul Shield on "+monster.getName()+".");
     }
     
     
