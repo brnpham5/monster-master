@@ -18,7 +18,10 @@ public class player implements playerInterface{
 	//in game. When this goes to 0 or below then player loses.
 	private int health = 20;
 	
-	
+	private int win;
+        private int draw;
+        private int loss;
+        
 	//Variable that holds all the cards in the players deck.
 	//Will be used to add cards to hand or summon skeletons through spell.
         public playerDeck Deck = new playerDeck();
@@ -70,6 +73,9 @@ public class player implements playerInterface{
 	public boolean summoned = false;
 	
         public player(){
+            win =0;
+            draw =0;
+            loss =0;
             defaultDeck();
             id = "Default";
             for(int loop = 0;loop < 5;loop++){
@@ -339,6 +345,39 @@ public class player implements playerInterface{
 		refresh();
 	}
 
+        
+                
+    public void addwin(){
+       win = win+1; 
+    }
+    public void adddraw(){
+       draw = draw+1; 
+    }    
+    public void addloss(){
+        loss = loss+1;
+    }  
+    public void setwin(int winvalue){
+        win = winvalue;
+    }  
+    public void setdraw(int drawvalue){
+        draw = drawvalue;
+    }   
+    public void setloss(int lossvalue){
+        loss = lossvalue;
+    }  
+    public int getwin(){
+        return win;
+    }  
+    public int getdraw(){
+        return draw;
+    }  
+    public int getloss(){
+        return loss;
+    }    
+    
+    
+    
+        
     @Override
     public boolean getLose() {
         return lose;
