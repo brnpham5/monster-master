@@ -21,7 +21,7 @@ public class Raimei extends Magic{
     public void effect(YugiPlayer owner, YugiPlayer enemy, int target, int position){
             owner.setHp(300);
             owner.grave.add(this);
-            System.out.println(owner.id + " used Hinotama.");
+            System.out.println(owner.id + " used Raimei.");
             
     }
 }

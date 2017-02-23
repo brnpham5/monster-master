@@ -15,13 +15,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Here is the unit test case for the yugioh ninja card. 
- * The activation of the ability and the ability itself are tested.
+ * This is the unit test case for master alien yugioh card.
  * @author Michael
  */
-public class MasterNinjaTest {
+public class MasterAlienTest {
     
-    public MasterNinjaTest() {
+    public MasterAlienTest() {
     }
     
     @BeforeClass
@@ -40,40 +39,47 @@ public class MasterNinjaTest {
     public void tearDown() {
     }
 
+    
     /**
-     * Test of effect method, of class MasterNinja. 
+     * This the unit test case for master alien attack function.
+     * This makes sure that the owner takes no damage when the defending monster
+     * has higher defense and is in defense mode.
      */
     @Test
-    public void testEffect() {
-        System.out.println("effect");
+    public void testAttackLessDefense() {
         YugiPlayer human = new YugiPlayer(new DumbYugi(),"human");
         YugiPlayer cpu = new YugiPlayer(new DumbYugi(),"cpu");
-        cpu.field.addMon(new Greeble());
-        cpu.field.getMon(0).attackPos = false;
-        cpu.field.getMon(0).flipped = false;
-        int target = 0;
-        int position = 0;
-        MasterNinja instance = new MasterNinja();
-        instance.effect(human, cpu, target, position);
-        assertTrue(cpu.field.isMonEmpty() && cpu.grave.get(0).getName().equals("Greeble"));
-    }
-
-    /**
-     * Test of attack method, of class MasterNinja.
-     */
-    @Test
-    public void testAttack() {
-        System.out.println("attack");
-        YugiPlayer human = new YugiPlayer(new DumbYugi(),"human");
-        YugiPlayer cpu = new YugiPlayer(new DumbYugi(),"cpu");
-        human.field.addMon(new MasterNinja());
+        human.hand.clear();
+        human.field.addMon(new MasterAlien());
         human.field.getMon(0).attackPos = true;
         human.field.getMon(0).flipped = true;
         cpu.field.addMon(new Greeble());
         cpu.field.getMon(0).attackPos = false;
-        cpu.field.getMon(0).flipped = false;
+        cpu.field.getMon(0).defMod = 2500;
+        cpu.field.getMon(0).flipped = true;
         human.field.getMon(0).attack(human, cpu, 0, 0);
-        assertTrue(cpu.field.isMonEmpty());
+        assertTrue(!cpu.field.isMonEmpty() && human.getHp() == 4000);
     }
     
+    
+    /**
+     * This the unit test case for master alien attack function.
+     * This makes sure that the owner takes no damage when the defending monster
+     * has higher attack and is in attack mode.
+     */
+    @Test
+    public void testAttackLessAttack() {
+        YugiPlayer human = new YugiPlayer(new DumbYugi(),"human");
+        YugiPlayer cpu = new YugiPlayer(new DumbYugi(),"cpu");
+        human.hand.clear();
+        human.field.addMon(new MasterAlien());
+        human.field.getMon(0).attackPos = true;
+        human.field.getMon(0).flipped = true;
+        cpu.field.addMon(new Greeble());
+        cpu.field.getMon(0).attackPos = true;
+        cpu.field.getMon(0).atkMod = 2500;
+        cpu.field.getMon(0).flipped = true;
+        human.field.getMon(0).attack(human, cpu, 0, 0);
+        assertTrue(!cpu.field.isMonEmpty() && human.getHp() == 4000);
+    }
 }
