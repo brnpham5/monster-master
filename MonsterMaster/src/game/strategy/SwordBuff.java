@@ -7,6 +7,7 @@ package game.strategy;
 
 import cards.Monster;
 import game.move;
+import game.playerPackage.YugiPlayer;
 import game.playerPackage.player;
 
 /**
@@ -14,6 +15,9 @@ import game.playerPackage.player;
  * @author Michael
  */
 public class SwordBuff implements move{
+    
+    
+    
     	//Function will look through the player's field.
 	//The function will select the player's monster with the highest attack
 	//that does not already have a sword.
@@ -32,16 +36,23 @@ public class SwordBuff implements move{
 		}
 		for(int loop = 0; loop < user.field.size(); loop++){
 			Monster mon = user.field.get(loop);
-                        System.out.println(mon.getName()+" " + mon.getDef() +" " +mon.getHp());
-				if(mon.getAtk() > highest && mon.getHp() > healthy && !mon.sword){
-                                    pos = loop;
-                                    highest = mon.getAtk();
-                                    healthy = mon.getHp();
-				}
+                        System.out.println(mon.getName()+" "+mon.getAtk());
+			if(mon.getAtk() > highest && mon.getHp() > healthy && !mon.sword){
+                            System.out.println("tre");
+                            pos = loop;
+                            highest = mon.getAtk();
+                            healthy = mon.getHp();
 			}
-                
+			}
+                System.out.println(pos);
 		if(pos != -1){
+                    System.out.println(user.hand.get(loc).toString());
                     user.hand.get(loc).effect(user, null, pos, loc);
 		}
 	}
+
+    @Override
+    public void executeY(YugiPlayer user, YugiPlayer enemy) {
+        //nothing
+    }
 }

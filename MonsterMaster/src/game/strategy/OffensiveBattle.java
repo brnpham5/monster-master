@@ -7,6 +7,7 @@ package game.strategy;
 
 import cards.Monster;
 import game.move;
+import game.playerPackage.YugiPlayer;
 import game.playerPackage.player;
 import java.util.ArrayList;
 
@@ -62,4 +63,9 @@ public class OffensiveBattle implements move{
 			}
 		return position;
 	}
+
+    @Override
+    public void executeY(YugiPlayer user, YugiPlayer enemy) {
+    //nothing
+    }
 }

@@ -31,6 +31,7 @@ public class Sword extends Spell{
     //The spell will switch the monster's flag for sword to true.
     //The function will then remove the card and print out a statement
     //saying the spell was used on a monster.
+    @Override
     public void effect(player owner, player enemy, int target, int position){
         owner.field.get(target).sword = true;
 	owner.hand.remove(position);

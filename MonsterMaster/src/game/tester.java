@@ -7,7 +7,6 @@ import cards.Spells;
 import cards.Monsters;
 import java.util.Scanner;
 
-import cards.*;
 
 //Here is the tester for the game.
 //The user will get to try 4 tests. 
@@ -71,9 +70,9 @@ public class tester {
 				System.out.println("Human Hp: \t"+ human.getHp() +
 		               "\t Computer Hp:\t"+ cpu.getHp());
 				human.planB = new Offensive();
-				human.hand.add(powers.shield);
-				human.hand.add(powers.sword);
-				human.hand.add(powers.curse);
+				human.hand.add(powers.shield());
+				human.hand.add(powers.sword());
+				human.hand.add(powers.curse());
 				/*human.field.add(group.greebler);
 				cpu.field.add(group.greebler);*/
 				human.turn(cpu);

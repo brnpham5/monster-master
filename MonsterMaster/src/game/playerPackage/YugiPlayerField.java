@@ -68,7 +68,7 @@ public class YugiPlayerField{
             return temp;
             
         } else {
-            System.out.println ("Card not found.");
+            System.out.println (card.getName()+" not found on field.");
             return null;
         }
     }
@@ -87,7 +87,7 @@ public class YugiPlayerField{
             return temp;
             
         } else {
-            System.out.println ("Card not found.");
+            System.out.println (card.getName()+" not found on field.");
             return null;
         }
     }
@@ -136,6 +136,8 @@ public class YugiPlayerField{
     public void addMagic(Magic card){
         if(magics.size() < MAXSIZE)
             magics.add(card);
+        else
+            System.out.println("Card not added");
     }
     
     
@@ -234,12 +236,28 @@ public class YugiPlayerField{
      */
     public boolean findFamily(int family){
         for(Mon card : monsters){
-            if(card.getEle() == family)
+            if(card.getFam() == family)
                 return true;
         }
         return false;
     }
     
+    
+    /**
+     * This function looks through the opposing player's field and check for 
+     * monster in attack position with the highest attack.
+     * @return The highest attack value of monster in attack position.
+     */
+    public int findStrongest(){
+        int highest =  0;
+        for(Mon card : monsters){
+            if(card.flipped && card.attackPos){
+                if(card.getStat() > highest)
+                    highest =  card.getStat();
+            }
+        }
+        return highest;
+    }
     
     
     /**

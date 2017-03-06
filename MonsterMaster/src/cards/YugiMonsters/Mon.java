@@ -5,6 +5,7 @@
  */
 package cards.YugiMonsters;
 
+import cards.Card;
 import cards.Monster;
 import cards.YugiSpells.Magic;
 import game.playerPackage.YugiPlayer;
@@ -15,7 +16,7 @@ import game.playerPackage.YugiPlayer;
  * @author Michael
  * @version 1.1
  */
-public class Mon extends Monster{
+public class Mon extends Monster implements Card{
 
     
     
@@ -128,37 +129,48 @@ public class Mon extends Monster{
     //Inside are the outcomes of the battle between the monsters. 
     public void attack(YugiPlayer owner, YugiPlayer enemy, int target, int position) {
         Mon opponent = enemy.field.getMon(target);
-        if(target == -1){enemy.setHp(getAtk());}
-        else if(target == -2){return;}
-        else{
+        switch(target){
+            case -1:
+                System.out.println(name +" attacks "+ enemy.id);
+                enemy.setHp(getAtk()); break;
+            case -2: return;
+            default:
+                System.out.println(name +" attacks "+ opponent.name);
             if(attack > opponent.getStat()){
                 if(opponent.attackPos){
+                    System.out.println(name +" killed "+ opponent.name+
+                                       " and deals "+ (attack - opponent.getStat()) + " damage.");
                     enemy.setHp(attack - opponent.getStat());
-                    opponent.deathEffect(owner, enemy, target);
+                    opponent.deathEffect(enemy, owner, target);
                     enemy.grave.add(opponent);
                     enemy.field.removeMon(target);
                 }
                 else {
-                    opponent.deathEffect(owner, enemy, position);
+                    System.out.println(name +" killed "+ opponent.name);
+                    opponent.deathEffect(enemy, owner, position);
                     enemy.grave.add(opponent);
                     enemy.field.removeMon(target);
                 }
             }
             else if(attack < opponent.getStat()){
                     if(opponent.attackPos){
+                        System.out.println(name +" is killed and "+ owner.id +
+                                           " takes "+ (opponent.getStat()-attack) + " damage.");
                         owner.setHp(opponent.getStat()-attack);
                         owner.field.getMon(position).deathEffect(owner, enemy, position);
                         owner.grave.add(owner.field.getMon(position));
                         owner.field.removeMon(position);
                     }
                 else {
+                    System.out.println(owner.id +" takes "+ (opponent.getStat()-attack) +" damage.");
                     owner.setHp(opponent.getStat()-attack);
                     opponent.flipped = true;
                     }
             }
             else {
                 if(opponent.attackPos){
-                    opponent.deathEffect(owner, enemy, target);
+                    System.out.println(name+" and "+ opponent.name+" died." );
+                    opponent.deathEffect(enemy, owner, target);
                     enemy.grave.add(opponent);
                     enemy.field.removeMon(target);
                     owner.field.getMon(position).deathEffect(owner, enemy, position);
@@ -191,6 +203,7 @@ public class Mon extends Monster{
         int offset = 0;
         for(int loop = 0; loop < 5;loop++){
             if(equipped[loop]){
+                owner.field.print();
                 Magic spell = owner.field.getMagic(loop - offset);
                 spell.removedEffect(owner, enemy, position, loop-offset);
                 offset++;
@@ -213,9 +226,9 @@ public class Mon extends Monster{
     //Owner = player object that is summoning monster.
     //Position is where the monster card is in the hand.
     //State is wheter or not the monster is summoned in attack position.
-    public void summon(YugiPlayer owner, int position,boolean state){
+    public void summon(YugiPlayer owner,boolean state){
         owner.field.addMon(this);
-        owner.hand.remove(position);
+        owner.hand.remove(this);
         if(state){ 
             attackPos = true;
             flipped = true;
@@ -224,6 +237,17 @@ public class Mon extends Monster{
             attackPos = false;
             flipped = false;
         }
+    }
+    
+    
+    public void switchPos(){
+        if(!attackPos){
+            attackPos = true;
+            if(!flipped)
+                flipped = true;
+        }
+        else 
+            attackPos = false;
     }
     
     

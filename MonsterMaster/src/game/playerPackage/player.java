@@ -3,9 +3,9 @@ import game.strategy.Dumb;
 import game.strategy.Offensive;
 import cards.Spells;
 import cards.Monsters;
-import cards.Monster;
 import cards.*;
 import game.move;
+import game.strategy.Strategy;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,10 @@ public class player implements playerInterface{
 	//in game. When this goes to 0 or below then player loses.
 	private int health = 20;
 	
-	
+	private int win;
+        private int draw;
+        private int loss;
+        
 	//Variable that holds all the cards in the players deck.
 	//Will be used to add cards to hand or summon skeletons through spell.
         public playerDeck Deck = new playerDeck();
@@ -70,6 +73,9 @@ public class player implements playerInterface{
 	public boolean summoned = false;
 	
         public player(){
+            win =0;
+            draw =0;
+            loss =0;
             defaultDeck();
             id = "Default";
             for(int loop = 0;loop < 5;loop++){
@@ -116,8 +122,9 @@ public class player implements playerInterface{
         //Moved the deck creation from constructor to this function.
         //By editing this function you create the default deck that player
         //objects use.
+        @Override
         public void defaultDeck(){
-            ArrayList <Card> Cards = new ArrayList <Card>();
+            ArrayList <Card> Cards = new ArrayList();
             Monsters group = new Monsters();
 		Spells powers = new Spells();
                 Cards.add(group.alien());
@@ -134,21 +141,22 @@ public class player implements playerInterface{
 		Cards.add(group.dwarf());
 		Cards.add(group.greebler());
                 Cards.add(group.greebler());
-		Cards.add(powers.shield);
-		Cards.add(powers.shield);
-		Cards.add(powers.sword);
-		Cards.add(powers.sword);
-		Cards.add(powers.sword);
-                Cards.add(powers.fireSword);
-                Cards.add(powers.iceShield);
-		Cards.add(powers.curse);
-		Cards.add(powers.curse);
-		Cards.add(powers.curse);
+		Cards.add(powers.shield());
+		Cards.add(powers.shield());
+		Cards.add(powers.sword());
+		Cards.add(powers.sword());
+		Cards.add(powers.sword());
+                Cards.add(powers.fireSword());
+                Cards.add(powers.iceShield());
+		Cards.add(powers.curse());
+		Cards.add(powers.curse());
+		Cards.add(powers.curse());
 		Deck = new playerDeck(Cards);
         }
         
         //Counts the up number of certain cards in the hand.
         //Used by Strategy classes to add moves to arraylist for player to do.
+        @Override
         public int[] countHand(){
             int [] contents = new int[15];
             for(int loop = 0; loop < hand.size(); loop++){
@@ -191,6 +199,7 @@ public class player implements playerInterface{
 	//Player draws a card from their deck.
 	//If they can't then they lost.
 	//Program  checks if they can draw before getting card from deck.
+        @Override
 	public void getCard(){
 		if(Deck.checkDeck()){
 			hand.add(Deck.draw());
@@ -278,8 +287,7 @@ public class player implements playerInterface{
 	public boolean canAttack(){
 		for(int loop = 0; loop < field.size();loop++){
 			if(!field.get(loop).attacked && field.get(loop).getPlaced() <= 0){
-                            System.out.println(field.get(loop).getName() + " "+ field.get(loop).getPlaced());
-				return true;
+                            return true;
 			}
 		}
 		return false;
@@ -303,7 +311,7 @@ public class player implements playerInterface{
 	//This is how the player interacts when on their turn happens.
 	//Strategy changes which actions the player does.
 	//Main flow of the function is draw, summon, use spell, and attack.
-	public void turn(player enemy){
+        public void turn(player enemy){
 		ArrayList <move> moves;
                 
                 //Draw Card
@@ -336,5 +344,51 @@ public class player implements playerInterface{
 		}while(!moves.isEmpty());
 		refresh();
 	}
+
+        
+                
+    public void addwin(){
+       win = win+1; 
+    }
+    public void adddraw(){
+       draw = draw+1; 
+    }    
+    public void addloss(){
+        loss = loss+1;
+    }  
+    public void setwin(int winvalue){
+        win = winvalue;
+    }  
+    public void setdraw(int drawvalue){
+        draw = drawvalue;
+    }   
+    public void setloss(int lossvalue){
+        loss = lossvalue;
+    }  
+    public int getwin(){
+        return win;
+    }  
+    public int getdraw(){
+        return draw;
+    }  
+    public int getloss(){
+        return loss;
+    }    
+    
+    
+    
+        
+    @Override
+    public boolean getLose() {
+        return lose;
+    }
+
+    @Override
+    public void setStrategy(Strategy strat) {
+        if(strat instanceof Dumb)
+            planA = new Dumb();
+        else 
+            planB = new Offensive();
+    }
         
 }

@@ -1,6 +1,6 @@
 package cards;
 
-import cards.Card;
+import game.playerPackage.YugiPlayer;
 import game.playerPackage.player;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -160,6 +160,7 @@ public class Monster implements Card {
 	
 	public int getPlaced(){return placed;}
 	
+        public void setPlaced(int value){placed = value;}
         
         
         //Setter for monster's health value.
@@ -171,4 +172,9 @@ public class Monster implements Card {
 	}
 	
 	public int getHp(){ return health;}
+
+    @Override
+    public void effect(YugiPlayer owner, YugiPlayer enemy, int target, int position) {
+        //does nothing
+    }
 }

@@ -33,10 +33,9 @@ public class TowerShield extends Magic{
         Mon monster = owner.field.getMon(target);
         monster.defMod += 300;
         owner.field.addMagic(this);
-        owner.hand.remove(position);
         place = owner.field.magicSize()-1;
         monster.equipped[place] = true;
-        System.out.println(owner.id +" used Salamandra on "+monster.getName()+".");
+        System.out.println(owner.id +" used Tower Shield on "+monster.getName()+".");
     }
     
     

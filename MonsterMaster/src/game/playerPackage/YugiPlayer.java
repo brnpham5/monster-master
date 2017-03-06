@@ -9,6 +9,9 @@ import cards.Card;
 import cards.YugiMonsters.*;
 import cards.YugiSpells.*;
 import game.move;
+import game.strategy.DumbYugi;
+import game.strategy.OffensiveYugi;
+import game.strategy.Strategy;
 import game.strategy.YugiStrategy;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -17,7 +20,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @author Michael
  */
-public class YugiPlayer extends player{
+public class YugiPlayer implements playerInterface{
 
     
     
@@ -26,19 +29,26 @@ public class YugiPlayer extends player{
     private int health = 4000;
 
 	
-    
+
+    //Variable that holds all the cards in the players deck.
+    //Will be used to add cards to hand or summon skeletons through spell.
+    public playerDeck Deck = new playerDeck();
+	
+	
+    //Variable that holds all cards in player's hand
+    //These cards are playable by the player.
+    public playerHand hand = new playerHand();
+	
+	
+    //Variable that holds all used up spells or killed monsters.
+    //These cards will remain here unless beckon or necromancy spell is used.
+    public playerGrave grave = new playerGrave();    
     
     //Variable that holds the monsters that protects the player.
     //These monsters can attack the enemy if the attacking monster's
     //position is attack.
     public YugiPlayerField field = new YugiPlayerField();
 	
-    
-    //Variable is flag that tells if the player has lost or not.
-    //Will only switch to true if the player can't draw or lost
-    //all of their health points.
-    public boolean lose = false;
-        
         
     
     //Variable that determines if the dumb strategy will be used
@@ -47,16 +57,63 @@ public class YugiPlayer extends player{
     YugiStrategy plan;
 
     
+
+    //Variable is flag that tells if the player has lost or not.
+	//Will only switch to true if the player can't draw or lost
+	//all of their health points.
+	public boolean lose = false;
+        
+        
+        
+    //A simple string that holds the name of the player.
+	//Only used in tester for display purposes while output
+	//runs to see what is happening. 
+	public String id;
+	
+	
+        
+        //Flag that tells that the player has summoned a monster.
+        //This will be turned true after executing a summoning move.
+        //The flag is turned false at the end of the player's turn.
+	public boolean summoned = false;
+        
+        
+
+       //
+
     public YugiPlayer(){
         super(null,null,"Default");
         plan = null;
     }
     
     //
+
     public YugiPlayer(YugiStrategy strat,String name){
-        super(null,null,name);
         plan = strat;
+        id  = name;
+        defaultDeck();
+        for(int draw = 0; draw < 4;draw++){
+            getCard();
+        }
     }
+    
+
+    //Constructor that you can use for testing.
+    //Set the strategy for the player with Dumb strat or Offensive plan.
+        //Only one strategy should be have a value and the other is null.
+        //If both parameters have values, strat is used in move planning.
+        //String name is name of player. Used for showing game details.
+        //The ArrayList is the premade deck passed.
+        //Draws is the numbers of draws the player does to get their hand.
+        public YugiPlayer(YugiStrategy strat, String name,ArrayList<Card> Cards,int draws){
+            Deck = new playerDeck(Cards);
+            id = name;
+            plan = strat;
+            for(int loop = 0;loop < draws;loop++){
+		getCard();
+            }
+        }
+
     
     @Override
     public void defaultDeck() {
@@ -69,7 +126,9 @@ public class YugiPlayer extends player{
         Cards.add(new MasterAlien());
         Cards.add(new MrBones());
         Cards.add(new MrBones());
-        Cards.add(new MrBones());
+        Cards.add(new ProtoGolem());
+        Cards.add(new DarkGray());
+        Cards.add(new FaithBird());
         Cards.add(new Fireyarou());
         Cards.add(new Fireyarou());
         Cards.add(new Hinotama());
@@ -80,30 +139,45 @@ public class YugiPlayer extends player{
         Cards.add(new TowerShield());
         Deck = new playerDeck(Cards);
     }
-
+    
+    
     @Override
     public int[] countHand() {
-        int [] contents = new int[13];
+        int [] contents = new int[14];
             for(int loop = 0; loop < hand.size(); loop++){
                 String spellName = hand.get(loop).getName();
                 switch (spellName){
-                    case "Berserker's Sword": contents[1]++;
+                    case "Berserker's Sword": 
+                        contents[1]++;
+                        contents[13]++;
                         break;
-                    case "Tower Shield": contents[2]++;
+                    case "Tower Shield": 
+                        contents[2]++;
+                        contents[13]++;
                         break;
-                    case "Soul Shield": contents[3]++;
+                    case "Soul Shield": 
+                        contents[3]++;
+                        contents[13]++;
                         break;
-                    case "Salamandra": contents[4]++;
+                    case "Salamandra": 
+                        contents[4]++;
+                        contents[13]++;
                         break;
-                    case "Nephthy's Curse": contents[5]++;
+                    case "Nephthy's Curse": 
+                        contents[5]++;
+                        contents[13]++;
                         break;
                     case "heal": contents[6]++;//Need to change
                         break;
                     case "restore": contents[6]++;//Need to change
                         break;
-                    case "Hinotama": contents[7]++;
+                    case "Hinotama": 
+                        contents[7]++;
+                        contents[13]++;
                         break;
-                    case "lightning": contents[7]++;//Need to change
+                    case "Raimei": 
+                        contents[7]++;
+                        contents[13]++;
                         break;
                     case "sacrifice": contents[8]++;//Need to change
                         break;
@@ -146,35 +220,18 @@ public class YugiPlayer extends player{
         health -= dmg;
         if (health <= 0){lose = true;}
     }
-
     
     
-    /**
-     * Returns the player's health point value
-     * @return Player's health point value.
-     */
-    @Override
-    public int getHp() {return health;}
-    
-    
-    
-    
-    @Override
-    public boolean[][] spellUse(int[] counts, player enemy) {
-        return new boolean [1][1];}
-    
-    
-    
-    
+        
     public boolean[][] spellUse(int[] counts, YugiPlayer enemy) {
         boolean[][] spells = new boolean[13][2];
         
         if(field.magicSize() >= field.MAXSIZE){ return spells;}
         
          //Sets flag for true if certain spells in hand.
-	if(counts[1] > 0){ spells[0][0] = true;} //Sword
-        if(counts[2] > 0){ spells[1][0] = true;} //Shield
-	if(counts[3] > 0){ spells[2][0] = true;} //ice shield
+	if(counts[1] > 0){ spells[0][0] = true;} //Berserker Sword
+        if(counts[2] > 0){ spells[1][0] = true;} //Tower Shield
+	if(counts[3] > 0){ spells[2][0] = true;} //Soul Shield
         if(counts[4] > 0){ spells[3][0] = true;} //Salamandra
         if(counts[5] > 0){ spells[4][0] = true;} //Nephthys Curse
         if(counts[6] > 0){ //heal spells
@@ -227,38 +284,68 @@ public class YugiPlayer extends player{
         return false;
     }
 
-    @Override
-    public void turn(player enemy){}
     
-    public void turn(YugiPlayer enemy) {
+    
+    public int findStrongest(){
+        int highest = 0;
+        Mon card;
+        for(int loop = 0; loop < hand.size();loop++){
+            if(hand.get(loop) instanceof Mon){
+                card = (Mon)hand.get(loop);
+                if(card.getAtk() > 0)
+                    highest = card.getAtk();
+            }
+        }
+        return highest;
+    }
+
+    
+    public void turn(YugiPlayer enemy,int turn) {
         plan.drawPhase(this);
         if(lose){return;}
-        System.out.println("Hand");
-        hand.print();
-        System.out.println("Field");
-        field.print();
         for(move action:plan.mainPhase(this, enemy)){
-            action.execute(this, enemy);
+            action.executeY(this, enemy);
         }
-        plan.battlePhase(this, enemy);
+        if(turn != 1)
+            plan.battlePhase(this, enemy);
         endphase();
+        System.out.println("\n\n=================\nHand\n=================");
+        hand.print();
+        System.out.println("\n=================\nField\n=================");
+        field.print();
     }
 
 
     
     //When player turn ends, summon flag is set to false and monster's
-        //attack flag is set to false. Also every monster placed value is reduced
-        //by 1.
-	private void endphase(){
-		summoned = false;
-		for(int loop = 0; loop < field.monSize();loop++){
-			if(field.getMon(loop).attacked){
-				field.getMon(loop).attacked = false;
-			}
-		}
-                while(hand.getSize() > 7){
-                    int position = ThreadLocalRandom.current().nextInt(0, hand.getSize());
-                    hand.remove(position);
-                }
+    //attack flag is set to false. Also every monster placed value is reduced
+    //by 1.
+    private void endphase(){
+	summoned = false;
+	for(int loop = 0; loop < field.monSize();loop++){
+            if(field.getMon(loop).attacked){
+		field.getMon(loop).attacked = false;
+            }
 	}
+        while(hand.getSize() > 7){
+            int position = ThreadLocalRandom.current().nextInt(0, hand.getSize());
+            hand.remove(position);
+        }
+    }
+
+    @Override
+    public boolean getLose() {
+        return lose;
+    }
+
+    @Override
+    public void setStrategy(Strategy strat) {
+        if(strat instanceof DumbYugi)
+            plan = new DumbYugi();
+        else 
+            plan = new OffensiveYugi();
+    }
+
+    @Override
+    public int getHp() { return health;}
 }
