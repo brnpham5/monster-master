@@ -82,7 +82,7 @@ public class YugiPlayer implements playerInterface{
        //
 
     public YugiPlayer(){
-        super(null,null,"Default");
+        super();
         plan = null;
     }
     

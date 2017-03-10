@@ -68,7 +68,10 @@ public class HumanYugi extends YugiPlayer{
     
     private void battlePhase(YugiPlayer enemy,Scanner input){
         int choice; 
-            System.out.println("Select one of your monsters to attack.");
+        do{
+            if(!canAttack())
+                break;
+            System.out.println("Select one of your monsters to attack. Use -1 to end battle phase.");
             choice = input.nextInt();
             if(choice >= 1 && choice <= field.monSize()){
                 Mon card = field.getMon(choice-1);
@@ -80,7 +83,7 @@ public class HumanYugi extends YugiPlayer{
                         if(choice >= 1 && choice <= enemy.field.monSize()){
                             card.attack(this,enemy,(choice-1),pos);
                             try{
-                            field.getMon(pos).attacked =true;
+                            field.getMon(pos).attacked = true;
                             }catch(NullPointerException er)    {
                                 
                             }                    
@@ -88,12 +91,15 @@ public class HumanYugi extends YugiPlayer{
                     else
                         System.out.println("Invalid move");
                     }
-                    else{
-                         card.attack(this,enemy,-1,pos);
-                         field.getMon(pos).attacked =true;
+                else{
+                    card.attack(this,enemy,-1,pos);
+                    field.getMon(pos).attacked =true;
+                    if(enemy.getLose())
+                        choice = -1;
                     }
                 }
             }
+        }while(canAttack() && choice != -1);
     }
     
     
@@ -169,7 +175,7 @@ public class HumanYugi extends YugiPlayer{
             System.out.println("Select the card position.");
             choice = input.nextInt();
             if(choice >= 1 && choice <= hand.size()){
-                int pos = choice;
+                int pos = choice-1;
                 if(hand.get(choice-1) instanceof Magic){
                     Magic card = (Magic)hand.get(choice-1);
                     if(card.getCategory() == 2){
@@ -177,7 +183,7 @@ public class HumanYugi extends YugiPlayer{
                             System.out.println("Card cannot be used without fire element monster.");
                         }
                         do{
-                        System.out.println("Select position of monster to equip from your field.");
+                        System.out.println("Select position of monster to equip from your field. Use -1 to cancel spell.");
                         choice = input.nextInt();
                         if(choice >= 1 && choice <= field.monSize()){
                             pos = choice;
@@ -203,10 +209,11 @@ public class HumanYugi extends YugiPlayer{
                         if(card.getName().equals("Nephthy's Curse")){
                             if(!enemy.field.isMonEmpty()){
                                 do{
-                                    System.out.println("Select position of monster from enemy field.");
+                                    System.out.println("Select position of monster from enemy field. Use -1 to cancel spell.");
                                     choice = input.nextInt();
                                     if(choice >= 1 && choice <= enemy.field.monSize()){
                                           hand.get(choice-1).effect(this, enemy, choice-1, pos);
+                                          choice = -1;
                                     }
                                     else if(choice == -1)
                                         System.out.println("Spell Canceled");      
