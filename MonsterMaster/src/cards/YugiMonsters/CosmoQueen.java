@@ -10,7 +10,15 @@ package cards.YugiMonsters;
  * @author Dev
  */
 
-public class BlueEyesWD extends Mon{
+public class CosmoQueen extends Mon{
+    
+    /*
+    Monster: Cosmo Queen
+    Description: 
+    Queen of the galaxies and mistress of the stars.
+    
+    */
+    
     
     //Id is name of the monster.
     //Lvl is the level of the monster.
@@ -20,7 +28,7 @@ public class BlueEyesWD extends Mon{
     //Fam holds the int value which says family monster belongs to.
     //Ele holds the int value which says element monster belongs to.
     // ( String id, int lvl, int atk, int def,String types, int fam,int ele )
-    public BlueEyesWD(){
-        super("Blue-Eyes White Dragon",8,3000,2500,"n",4,3);
+    public CosmoQueen(){
+        super("Cosmo Queen",8,2900,2450,"n",16,0);
     }
 }

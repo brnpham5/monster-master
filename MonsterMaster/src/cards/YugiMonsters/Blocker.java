@@ -10,7 +10,15 @@ package cards.YugiMonsters;
  * @author Dev
  */
 
-public class BlueEyesWD extends Mon{
+public class Blocker extends Mon{
+    
+    /*
+    Monster: Blocker
+    Description: 
+    Constructed from several components, this monster can launch them in a pincer attack.
+    
+    */
+    
     
     //Id is name of the monster.
     //Lvl is the level of the monster.
@@ -20,7 +28,7 @@ public class BlueEyesWD extends Mon{
     //Fam holds the int value which says family monster belongs to.
     //Ele holds the int value which says element monster belongs to.
     // ( String id, int lvl, int atk, int def,String types, int fam,int ele )
-    public BlueEyesWD(){
-        super("Blue-Eyes White Dragon",8,3000,2500,"n",4,3);
+    public Blocker(){
+        super("Blocker",4,850,1800,"n",9,0);
     }
 }

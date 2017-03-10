@@ -10,7 +10,16 @@ package cards.YugiMonsters;
  * @author Dev
  */
 
-public class BlueEyesWD extends Mon{
+public class ArchfiendSoldier extends Mon{
+    
+    /*
+    Monster Archfiend Soldier
+    Description: 
+    An expert at battle who belongs to a crack diabolical unit. He's famous because he 
+    always gets the job done.
+    
+    */
+    
     
     //Id is name of the monster.
     //Lvl is the level of the monster.
@@ -20,7 +29,7 @@ public class BlueEyesWD extends Mon{
     //Fam holds the int value which says family monster belongs to.
     //Ele holds the int value which says element monster belongs to.
     // ( String id, int lvl, int atk, int def,String types, int fam,int ele )
-    public BlueEyesWD(){
-        super("Blue-Eyes White Dragon",8,3000,2500,"n",4,3);
+    public ArchfiendSoldier(){
+        super("Archfiend Soldier",4,1900,1500,"n",7,0);
     }
 }
