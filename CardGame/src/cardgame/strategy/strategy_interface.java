@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.playerPackage;
+package cardgame.strategy;
 
 /**
  *
  * @author brnpham
  */
-public class yugiField extends playerField{
+public interface strategy_interface {
     
 }

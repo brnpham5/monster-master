@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.playerPackage;
+package cardgame.cards.mm_spells;
 
 /**
- *
+ * 
+ * 
  * @author brnpham
  */
-public class yugiGrave extends playerGrave{
+public interface mm_spell_interface {
     
 }

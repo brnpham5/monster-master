@@ -3,14 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cards.YugiMonsters;
+package cardgame;
 
 /**
  *
  * @author brnpham
  */
-public class SkullRedBird extends Mon{
-    public SkullRedBird(){
-        super("Skull Red Bird",4,1550,1200,"n",19,5);
+public class CardGame {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
     }
+    
 }

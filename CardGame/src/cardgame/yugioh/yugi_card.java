@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cards.YugiMonsters;
+package cardgame.yugioh;
 
 /**
  *
  * @author brnpham
  */
-public class AxeRaider extends Mon{
-    public AxeRaider(){
-        super("Axe Raider",4,1700,1150,"n",18,1);
-    }
+public class yugi_card {
+    
 }

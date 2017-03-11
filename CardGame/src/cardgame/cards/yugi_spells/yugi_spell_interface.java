@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.playerPackage;
+package cardgame.cards.yugi_spells;
 
 /**
  *
  * @author brnpham
  */
-public class yugiHand extends playerHand{
+public interface yugi_spell_interface {
     
 }
