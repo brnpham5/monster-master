@@ -27,18 +27,15 @@ import java.util.concurrent.ThreadLocalRandom;
 public abstract class mm_monster extends mm_card implements mm_monster_interface{
     //Health a monster has
     //Default is the starting and max health a monster can have
-    //Mod is the modifier that comes from equipment
     protected int health, defaultHealth;
     
     //Attack a monster has
     //Default is the starting attack
-    //Mod is the modifier that comes from equipment
-    protected int attack, defaultAttack, posAttackMod = 0, negAttackMod = 0;
+    protected int attack, defaultAttack;
     
     //Defense a monster has
     //Default is the starting defense
-    //Mod is the modifier that comes from equipment
-    protected int defense, defaultDefense, posDefenseMod = 0, negDefenseMod = 0;
+    protected int defense, defaultDefense;
     
     //Time it takes to summon the monster
     //Current is the number of turns left to summon
@@ -183,42 +180,22 @@ public abstract class mm_monster extends mm_card implements mm_monster_interface
 
     //Returns attack + attack modifier
     public int getAttack() {
-        return attack + posAttackMod - negAttackMod;
+        return attack;
     }
 
     //Sets current attack
     public void setAttack(int attack) {
         this.attack = attack;
     }
-    
-    //Gets attack modifier (for buffs)
-    public int getPosAttackMod(){
-        return this.posAttackMod;
-    }
-    
-    //Sets attack modifier (for buffs)
-    public void setAttackMod(int modifier){
-        this.posAttackMod = modifier;
-    }
 
     //Returns defense + defense modifier
     public int getDefense() {
-        return defense + posDefenseMod - negDefenseMod;
+        return defense;
     }
 
     //Sets current defense
     public void setDefense(int defense) {
         this.defense = defense;
-    }
-    
-    //Gets defense modifier (for buffs)
-    public int getDefenseMod(){
-        return this.posDefenseMod;
-    }
-    
-    //Sets defense modifier (for buffs)
-    public void setDefenseMod(int modifier){
-        this.posDefenseMod = modifier;
     }
 
     //Returns current time to summon

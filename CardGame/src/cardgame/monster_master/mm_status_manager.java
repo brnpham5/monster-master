@@ -11,16 +11,15 @@ import java.util.ArrayList;
  * Contains all the status effects of the monster master game
  * @author brnpham
  */
+
+class Member
+{
+    public String FirstName; 
+    public String LastName;  
+    public int    BirthYear; 
+ };
+
 public class mm_status_manager {
-    public ArrayList <String> status = new ArrayList();
-    
-    mm_status_manager(){
-        status.add("Psychic");
-        status.add("Poison");
-        status.add("Reaper");
-        status.add("Ice Shield");
-        status.add("Shield");
-        status.add("Fire Sword");
-        status.add("Sword");
-    }
+    public String name;
+    public boolean affected;
 }
