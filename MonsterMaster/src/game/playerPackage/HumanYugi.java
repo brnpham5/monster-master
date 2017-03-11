@@ -17,11 +17,35 @@ import java.util.Scanner;
  */
 public class HumanYugi extends YugiPlayer{
     
+    /**
+     * Constructor of the human player of yugioh.
+     * @param name Name of the player
+     */
     public HumanYugi(String name) {
         super(null, name);
     }
     
+    /**
+     * A function that resets the variables in the the player object 
+     * to default values.
+     */
+    public void restart(){
+        defaultDeck();
+        health = 4000;
+        lose = false;
+        hand.clear();
+        grave.clear();
+        field.MagicClear();
+        field.MonsterClear();
+        summoned = false;
+    }
     
+    /**
+     * Turn algorithm of this player object.
+     * @param enemy The enemy player object.
+     * @param turn The turn number
+     * @param input  The scanner that reads in the input.
+     */
     public void turn(YugiPlayer enemy,int turn,Scanner input) {
         getCard();
         if(lose){return;}
@@ -32,9 +56,17 @@ public class HumanYugi extends YugiPlayer{
         endphase(input);
     }
     
+    
+    /**
+     * This is the main phase algorithm observed from yugioh games.  
+     * @param enemy The enemy player object.
+     * @param input The scanner that reads in input.
+     */
     private void mainphase(YugiPlayer enemy,Scanner input){
         int choice; 
         do{
+            //Print menu of actions player can take in main phase.
+            //Print out the player's hand and field.
                 System.out.println("\n\n=================\nCurrent Hand\n=================");
                 hand.print();
                 System.out.println("\n=================\nCurrent Field\n=================");
@@ -46,10 +78,13 @@ public class HumanYugi extends YugiPlayer{
                 System.out.println("-1. Go to Battle Phase.");
                 choice = input.nextInt();
                 int[] handCheck = countHand();
+                //Get player choice and 
                 switch(choice){
                     case 1:
                         if(field.monSize() < field.MAXSIZE)
                             summonMonster(handCheck,input);
+                        else
+                            System.out.println("Monster field is full.");
                         break;
                     case 2:
                         if(handCheck[13] > 0 && field.magicSize() != field.MAXSIZE)
@@ -58,6 +93,8 @@ public class HumanYugi extends YugiPlayer{
                     case 3:
                         if(!field.isMonEmpty())
                             switchMonPos(input);
+                        else
+                            System.out.println("Monster field is empty.");
                         break;
                     case -1: break;
                     default:
@@ -100,6 +137,7 @@ public class HumanYugi extends YugiPlayer{
                 }
             }
         }while(canAttack() && choice != -1);
+        System.out.println("Battle phase over");
     }
     
     
@@ -167,7 +205,11 @@ public class HumanYugi extends YugiPlayer{
             System.out.println("Cannot summon monster.");
     }
     
-    
+    /**
+     * This is function is how the user will use their spells.
+     * @param enemy the enemy player object
+     * @param input The scanner that reads the input
+     */
     private void useSpell(YugiPlayer enemy,Scanner input){
         int choice; 
             do{

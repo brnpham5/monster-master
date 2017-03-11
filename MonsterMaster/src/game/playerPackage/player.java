@@ -154,6 +154,18 @@ public class player implements playerInterface{
 		Deck = new playerDeck(Cards);
         }
         
+        
+        public void restart(){
+            health = 20;
+            defaultDeck();
+            field.clear();
+            hand.clear();
+            grave.clear();
+            lose = false;
+            summoned = false;
+        }
+        
+        
         //Counts the up number of certain cards in the hand.
         //Used by Strategy classes to add moves to arraylist for player to do.
         @Override
