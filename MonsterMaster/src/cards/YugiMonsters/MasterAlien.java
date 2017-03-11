@@ -13,6 +13,4 @@ public class MasterAlien extends Mon{
     public MasterAlien(){
         super("Master Alien",5,2000,1600,"n",13,3);
     }
-    
-    
 }

@@ -26,7 +26,7 @@ public class YugiPlayer implements playerInterface{
     
     //int value that represents how much life the player has 
     //in game. When this goes to 0 or below then player loses.
-    private int health = 4000;
+    protected int health = 4000;
 
 	
 
@@ -115,6 +115,9 @@ public class YugiPlayer implements playerInterface{
         }
 
     
+        /**
+         * A function that sets the deck of the player object.
+         */
     @Override
     public void defaultDeck() {
         ArrayList<Card> Cards = new ArrayList();
@@ -141,6 +144,10 @@ public class YugiPlayer implements playerInterface{
     }
     
     
+    /**
+     * Counts the number of certain cards in the hand. 
+     * @return an int array that says how many of each card is in the hand.
+     */
     @Override
     public int[] countHand() {
         int [] contents = new int[14];
@@ -222,7 +229,14 @@ public class YugiPlayer implements playerInterface{
     }
     
     
-        
+    /**
+     * Counts checks the hand for spell cards in the hand and check if conditions
+     * are good for activation.
+     * @param counts an int array that says which cards are in the player's hand.
+     * @param enemy the enemy player object
+     * @return a boolean array that states that specific spell card is in hand 
+     *         and can be used or not.
+     */    
     public boolean[][] spellUse(int[] counts, YugiPlayer enemy) {
         boolean[][] spells = new boolean[13][2];
         
@@ -285,9 +299,12 @@ public class YugiPlayer implements playerInterface{
     }
 
     
-    
+    /**
+     * Find the monster with the highest attack value on their field
+     * @return index of monster. -1 mean no monster on field.
+     */
     public int findStrongest(){
-        int highest = 0;
+        int highest = -1;
         Mon card;
         for(int loop = 0; loop < hand.size();loop++){
             if(hand.get(loop) instanceof Mon){
@@ -299,7 +316,11 @@ public class YugiPlayer implements playerInterface{
         return highest;
     }
 
-    
+    /**
+     * Turn algorithm of the yugioh player.
+     * @param enemy enemy player object.
+     * @param turn the turn number
+     */
     public void turn(YugiPlayer enemy,int turn) {
         plan.drawPhase(this);
         if(lose){return;}
@@ -317,9 +338,11 @@ public class YugiPlayer implements playerInterface{
 
 
     
-    //When player turn ends, summon flag is set to false and monster's
-    //attack flag is set to false. Also every monster placed value is reduced
-    //by 1.
+    /**
+     * When player turn ends, summon flag is set to false and monster's
+     * attack flag is set to false. Also if player has more than 7 cards in hand
+     * the player will randomly discard a card till they have less than 7 cards.
+     */
     private void endphase(){
 	summoned = false;
 	for(int loop = 0; loop < field.monSize();loop++){

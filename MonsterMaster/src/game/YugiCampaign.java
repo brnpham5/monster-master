@@ -15,11 +15,12 @@ import java.util.Scanner;
  *
  * @author Michael
  */
-public class YugiCampaign {
+public class YugiCampaign implements CampaignInterface{
     private HumanYugi human;
     
     private YugiPlayer cpu;
     
+    public int state = 0;
     
     public static void main(String[] args) throws InterruptedException{
         YugiCampaign game = new YugiCampaign();
@@ -28,67 +29,71 @@ public class YugiCampaign {
     
     
     
-    public void play() throws InterruptedException{
+    @Override
+    public void play(){
         
-        try (Scanner input = new Scanner(System.in)) {
+        /*try (Scanner input = new Scanner(System.in)) {
             int choice = 0;
-            while(choice != 1 && choice != 2){
+            while(state == 0){*/
                 System.out.println("Yu-gi-oh Sim");
                 System.out.println("1. New Game");
                 System.out.println("2. Load Game");
                 System.out.println("-------------");
-                choice = input.nextInt();
+                /*choice = input.nextInt();
             }   if (choice == 1) {
-                human = new HumanYugi("Human");
-                cpu = new YugiPlayer(new DumbYugi(),"Computer");
                 newGame(input);
             }
             //
-        }
+        }*/
     }
     
     
-    
+    @Override
     public void newGame(Scanner input) throws InterruptedException{
+        human = new HumanYugi("Human");
+        cpu = new YugiPlayer(new DumbYugi(),"Computer");
         int result = battle(input);
-        if(result == 0){
-            System.out.println("Continue?");
-                String choice = "";
-                while(!choice.equalsIgnoreCase("y") && !choice.equalsIgnoreCase("n")){
-                System.out.println("Enter y to retry or n to quit\n");
-                choice = input.next();    
+        switch (result) {
+            case 0:
+                {
+                    System.out.println("Continue?");
+                    String choice = "";
+                    while(!choice.equalsIgnoreCase("y") && !choice.equalsIgnoreCase("n")){    
+                        System.out.println("Enter y to retry or n to quit\n");
+                        choice = input.next();
+                    }   if(choice.equalsIgnoreCase("y")){
+                        human.restart();
+                        cpu = new YugiPlayer(new DumbYugi(),"Computer");
+                        newGame(input);
+                    }
+                    else{
+                        //Load game here or exit game?
+                    }   break;
                 }
-                if(choice.equalsIgnoreCase("y")){
-                    human = new HumanYugi("Human");
-                    cpu = new YugiPlayer(new DumbYugi(),"Computer");
-                    newGame(input);
+            case 1:
+                {
+                    //This could be call to another function
+                    //which loads in next character and starts battle.
+                   //Load next character 
+                    human.restart();
+                    //battle
                 }
-                else{
-                    //Load game here
-                }
-        }
-        else if(result == 1){
-            System.out.println("Continue?");
-                String choice = "";
-                while(!choice.equalsIgnoreCase("y") && !choice.equalsIgnoreCase("n")){
-                System.out.println("Enter y to continue or n to quit\n");
-                choice = input.next();    
-                }
-                if(choice.equalsIgnoreCase("y")){
-                    human = new HumanYugi("Human");
-                    cpu = new opponentsFactory().valentine1();
-                    newGame(input);
-                }
-            
-        }
-        else{
-            human = new HumanYugi("Human");
-            cpu = new YugiPlayer(new DumbYugi(),"Computer");
-            battle(input);
+            default:
+                human = new HumanYugi("Human");
+                cpu = new YugiPlayer(new DumbYugi(),"Computer");
+                battle(input);
+                break;
         }
             
     }
     
+    /**
+     * This is the function that handles the card duels in yu-gi-oh.
+     * @param input This is the scanner that reads in player input.
+     * @return A 1 or 0 depending on who wins. 1  = Human win. 0 = Computer win.
+     * @throws InterruptedException 
+     */
+    @Override
     public int battle(Scanner input) throws InterruptedException{
         int counter = 1;
         while(!human.getLose() && !cpu.getLose()){
@@ -118,4 +123,10 @@ public class YugiCampaign {
             return 1;
 	}
     }
+
+
+    @Override
+    public void loadGame() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }    
 }

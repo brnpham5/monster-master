@@ -18,10 +18,7 @@ import java.util.logging.Logger;
  * @author Michael
  */
 public class Main {
-    
-    private final MMCampaign gameM = new MMCampaign();
-    
-    private final YugiCampaign gameY = new YugiCampaign();
+
     
     public static void main(String[] args) throws RemoteException, NotBoundException, InterruptedException {
         // fire to localhost port 1099
@@ -34,6 +31,7 @@ public class Main {
         String line;
         Main self = new Main();
         char game;
+        CampaignInterface cardGame;
         
         try (Scanner input = new Scanner(System.in)) {
             do{
@@ -48,9 +46,13 @@ public class Main {
             game = remote.getGame();
             switch(game){                   //Depending on choice start a game, end program, or say invalid choice made.
                 case 'M':
-                    self.startMM(remote,input); remote.endGame(); break;                   
+                    cardGame = new MMCampaign();
+                    self.start(remote,input,cardGame); 
+                    remote.endGame(); break;                   
                 case 'Y':
-                    self.startY(remote,input); remote.endGame(); break;
+                    cardGame = new YugiCampaign();
+                    self.start(remote,input,cardGame); 
+                    remote.endGame(); break;
                 case '-':
                     if(remote.getState() == -1)
                         break;
@@ -74,58 +76,19 @@ public class Main {
         System.out.println("2) Yu-gi-oh");
         System.out.println("3) Exit Program\n");
     }
-    
+
     /**
-     * This is the function to play Monster Master
-     * @param remote This is the client service from the server
-     * @param in The scanner that reads in user input
-     * @throws RemoteException 
+     * The function that starts the game the user chose.
+     * @param remote The remote that gets input and switch the state of program.
+     * @param in the scanner which reads in user input
+     * @param game the campaign interface which the program uses to run the game.
+     * @throws InterruptedException 
      */
-    private void startMM(Client remote,Scanner in) throws RemoteException{
+    private void start(Client remote,Scanner in,CampaignInterface game) throws InterruptedException{
         int state = 0;
         do{
         //Bring up Main memu
-        gameM.play();
-        int choice = in.nextInt();
-        try {
-                remote.gameMainMenu(choice);
-                state = remote.getState();
-            } catch (RemoteException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }while(state == 0);
-        //if state == 1
-            //call new game
-            //Ask player question to set Ai?  Make class for human input?  
-        //else 
-            //call load game
-            //get input
-            //send game to load? client do it?
-        //while loop{
-        //call battle, let it print then get result
-            //let player save data during turn.
-            //if human is playing then have loop that ends when result of battle is found
-                //print life and turn counter
-                //while loop?{ coninute as long as its huamn turn. 
-                    //only do this if client is handling input else let human obj in campaign do it
-                    //print current human hand  and field. print comp field
-                    //print prompt of actions user can take
-                    //get input and send to client? let player obj handle instead?
-                    //if valid moves done then print hand and fields for up date
-                //}
-                //when human turn finish call cpu to take turn and print their field
-        //set player data with updated w/d/l values
-        //depending on result load new opponent or redo battle?
-        //check to see if final opponent lost
-        //} quit when final battle is done.
-        //Give end game message?  
-    }
-    
-    private void startY(Client remote,Scanner in) throws InterruptedException{
-        int state = 0;
-        do{
-        //Bring up Main memu
-        gameY.play();
+        game.play();
         int choice = in.nextInt();
             try {
                 remote.gameMainMenu(choice);
@@ -136,10 +99,10 @@ public class Main {
         
         }while(state == 0);
         if(state == 1)
-            gameY.newGame(in);
+            game.newGame(in);
         else
             state = 9; // place holder.
-            //gameY.loadGame();
+            //game.loadGame();
         System.out.println("You have finished the campaign for Yu-Gi-Oh.");
     }
 }

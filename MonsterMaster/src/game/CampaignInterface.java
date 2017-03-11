@@ -5,6 +5,8 @@
  */
 package game;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Michael
@@ -19,24 +21,19 @@ public interface CampaignInterface {
     /**
      * This function will set player object values for the match. This is selected 
      * by the player. 
-     * 
-     * @return Output to the console that shows the game's campaign.
      */
-    public String newGame();
+    public void newGame(Scanner in) throws InterruptedException;
     
     
     /**
      * This is called when the player has selected to load a previous save.
      * Save data will be loaded into player objects and match will commence.
-     * 
-     * @return Output for the console that shows data was loaded and the game
-     * continuing the campaign.
      */
-    public String loadGame();
+    public void loadGame();
     
     
     /**
      * 
      */
-    public void battle();
+    public int battle(Scanner in) throws InterruptedException;
 }

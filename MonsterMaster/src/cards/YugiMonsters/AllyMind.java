@@ -10,7 +10,17 @@ package cards.YugiMonsters;
  * @author Dev
  */
 
-public class BlueEyesWD extends Mon{
+public class AllyMind extends Mon{
+    
+    /*
+    Monster Ally Mind
+    Description: 
+    A high-performance unit developed to enhance the Artificial Intelligence program 
+    in Ally of Justice. Loaded with elements collected from a meteor from the Worm Nebula, 
+    it allows for high tuning performance, but its true capacity is not yet uncovered.
+    
+    */
+    
     
     //Id is name of the monster.
     //Lvl is the level of the monster.
@@ -20,7 +30,7 @@ public class BlueEyesWD extends Mon{
     //Fam holds the int value which says family monster belongs to.
     //Ele holds the int value which says element monster belongs to.
     // ( String id, int lvl, int atk, int def,String types, int fam,int ele )
-    public BlueEyesWD(){
-        super("Blue-Eyes White Dragon",8,3000,2500,"n",4,3);
+    public AllyMind(){
+        super("Ally Mind",5,1800,1400,"n",9,0);
     }
 }

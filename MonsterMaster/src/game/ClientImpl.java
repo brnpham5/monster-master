@@ -90,9 +90,9 @@ public class ClientImpl extends UnicastRemoteObject implements Client{
     public void endGame(){state = -1;}
     
     /**
-     * 
-     * @param choice
-     * @return
+     * This gets the input from the user and sets the state of the program. 
+     * @param choice The user input
+     * @return The state of the program.
      * @throws RemoteException 
      */
     @Override
