@@ -10,8 +10,8 @@ package cards.YugiMonsters;
  * @author Dev
  */
 
-public class Abaki extends Mon{
-    public Abaki(){
+public class Abaki extends Mon{ 
+public Abaki(){
         super("Abaki",4,1700,1100,"e",7,2);
-    }
+}
 }
