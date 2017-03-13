@@ -21,7 +21,7 @@ public class YugiCampaign implements CampaignInterface{
     private YugiPlayer cpu;
     
     public int state = 0;
-    
+    Save saveobject = new Save();
     public static void main(String[] args) throws InterruptedException{
         YugiCampaign game = new YugiCampaign();
         game.play();
@@ -76,6 +76,17 @@ public class YugiCampaign implements CampaignInterface{
                     //which loads in next character and starts battle.
                    //Load next character 
                     human.restart();
+                    //battle
+                }
+            case 2:
+                {
+                    //This could be call to another function
+                    //which loads in next character and starts battle.
+                   //Load next character 
+                    
+                    System.out.println("Save currently under progress. Working on fixing it");
+                    //saveobject.load(human, cpu, human, cpu, human, cpu, human, cpu);
+                    
                     //battle
                 }
             default:
